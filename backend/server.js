@@ -5,13 +5,16 @@ const cors = require('cors');
 const authRouter = require('./routes/auth/auth-route');
 const adminProductsRouter = require('./routes/admin/products-routes');
 const adminOrderRouter = require('./routes/admin/order-routes');
+const adminNutrientRouter = require('./routes/admin/nutrients-routes');
 const shopProductsRouter = require("./routes/shop/products-routes");
 const shopCartRouter = require("./routes/shop/cart-routes");
 const shopAddressRouter = require("./routes/shop/address-routes");
 const shopOrderRouter = require("./routes/shop/order-routes");
 const shopSearchRouter = require("./routes/shop/search-routes");
 const shopReviewRouter = require("./routes/shop/review-routes");
+const shopNutrientRouter = require("./routes/shop/nutrients-routes");
 const commonUIBannerRouter = require("./routes/common/uibanner-routes");
+const contactRouter = require("./routes/shop/contact-routes");
 
 mongoose.connect('mongodb+srv://newmadhushan01:l2NjQs7jW0laWCep@cluster0.c2ecl.mongodb.net/')
 .then(()=>console.log("Database Connected"))
@@ -41,14 +44,17 @@ app.use("/api/auth", authRouter);
 //app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/products", adminProductsRouter);
 app.use("/api/admin/orders", adminOrderRouter);
+app.use("/api/admin/nutrientsHandle", adminNutrientRouter);
 app.use("/api/shop/products", shopProductsRouter);
 app.use("/api/shop/cart", shopCartRouter);
 app.use("/api/shop/address", shopAddressRouter);
 app.use("/api/shop/order", shopOrderRouter);
 app.use("/api/shop/search", shopSearchRouter);
 app.use("/api/shop/review", shopReviewRouter);
+app.use("/api/shop/nutrientCalculation", shopNutrientRouter);
 
 app.use("/api/common/banner", commonUIBannerRouter);
+app.use("/api/shop/contact", contactRouter);
 
 
 app.listen(PORT, ()=>console.log(`Backend Server Running on Port ${PORT}`));

@@ -25,7 +25,7 @@ function CheckAuth({isAuthenticated, user, children}) {
 
 if(!isAuthenticated && 
   (location.pathname.includes("/dashboard") || location.pathname.includes("/products") || 
-  location.pathname.includes("/orders") || location.pathname.includes("/ui"))
+  location.pathname.includes("/orders") || location.pathname.includes("/ui") || location.pathname.includes("/manageNutrients"))
 ){
   return <Navigate to="/auth/login" />;
 }

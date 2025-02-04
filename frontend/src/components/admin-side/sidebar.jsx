@@ -28,6 +28,12 @@ const adminSidebarMenuItems = [
     path: "/admin/ui",
     icon: <BadgeCheck />,
   },
+  {
+    id: "manageNutrient",
+    label: "Manage Nutrients",
+    path: "/admin/manageNutrients",
+    icon: <BadgeCheck />,
+  },
 ];
 
 function MenuItems({ setOpen }) {

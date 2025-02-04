@@ -29,7 +29,7 @@ const SeafoodPrediction = () => {
     e.preventDefault();
     try {
       // Make POST request to FastAPI backend
-      const response = await axios.post('http://127.0.0.1:8000/predict', {
+      const response = await axios.post('https://janaka-nupehewage-seafood-quantity-prediction.hf.space/predict', {
         seafood_name: seafoodName,
         num_people: numPeople,
       });

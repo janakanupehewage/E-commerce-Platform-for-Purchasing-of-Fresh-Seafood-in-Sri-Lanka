@@ -1,6 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios"; // Import Axios
+import ContactUsImage from "../../assets/contactUs.jpg";
 
 function ContactUs() {
+  // State for form inputs
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+
+  // State for errors
+  const [errors, setErrors] = useState({});
+
+  // State for submission success or failure
+  const [submissionMessage, setSubmissionMessage] = useState("");
+
+  // Handle input change
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    setErrors({ ...errors, [name]: "" }); // Clear error on input change
+    setSubmissionMessage(""); // Clear submission message
+  };
+
+  // Validate inputs
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address.";
+    }
+    if (!formData.message.trim()) newErrors.message = "Message is required.";
+
+    return newErrors;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+    } else {
+      try {
+        // Send POST request with Axios
+        const response = await axios.post("http://localhost:5000/api/shop/contact/send-email", formData);
+
+        // Handle success
+        if (response.status === 200) {
+          setSubmissionMessage("Thank you for your message! We'll get back to you shortly.");
+          setFormData({ name: "", email: "", message: "" }); // Clear the form
+        }
+      } catch (error) {
+        // Handle error
+        console.error("Error submitting the form:", error);
+        setSubmissionMessage(
+          "Something went wrong while submitting your message. Please try again later."
+        );
+      }
+    }
+  };
+
   return (
     <div className="bg-white min-h-screen">
       <div className="container mx-auto px-6 py-12">
@@ -14,18 +77,19 @@ function ContactUs() {
         </p>
 
         {/* Form Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6" >
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Left Side: Image */}
-          <div
-            className="w-full md:w-1/2 h-80 rounded-lg bg-cover bg-center mb-8 md:mb-0"
-            style={{
-              backgroundImage: "url('https://via.placeholder.com/600x400')",
-            }}
-          ></div>
+          <div className="w-full md:w-1/2 mb-8 md:mb-0">
+            <img
+              src={ContactUsImage}
+              alt="Contact Us"
+              className="w-full h-80 object-cover rounded-lg"
+            />
+          </div>
 
           {/* Right Side: Form */}
           <div className="w-full md:w-1/2 bg-gray-100 p-6 rounded-lg shadow-md">
-            <form action="#" method="POST" className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name Input */}
               <div>
                 <label
@@ -39,9 +103,15 @@ function ContactUs() {
                   id="name"
                   name="name"
                   placeholder="Enter your full name"
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  required
+                  className={`w-full px-4 py-2 rounded-lg border ${
+                    errors.name ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-blue-600`}
+                  value={formData.name}
+                  onChange={handleChange}
                 />
+                {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
 
               {/* Email Input */}
@@ -57,9 +127,15 @@ function ContactUs() {
                   id="email"
                   name="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  required
+                  className={`w-full px-4 py-2 rounded-lg border ${
+                    errors.email ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-blue-600`}
+                  value={formData.email}
+                  onChange={handleChange}
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
               </div>
 
               {/* Message Input */}
@@ -75,10 +151,23 @@ function ContactUs() {
                   name="message"
                   rows="4"
                   placeholder="Write your message here"
-                  className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                  required
+                  className={`w-full px-4 py-2 rounded-lg border ${
+                    errors.message ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-blue-600`}
+                  value={formData.message}
+                  onChange={handleChange}
                 ></textarea>
+                {errors.message && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
               </div>
+
+              {/* Submission Feedback */}
+              {submissionMessage && (
+                <p className="text-center text-blue-600 font-semibold mt-4">
+                  {submissionMessage}
+                </p>
+              )}
 
               {/* Submit Button */}
               <div className="text-center">

@@ -122,6 +122,11 @@ export const registerFormControls = [
       label : 'Prediction',
       path : '/shop/prediction'
     },
+    {
+      id : 'calculate-nutrients',
+      label : 'Nutrients Insights',
+      path : '/shop/calculate-nutrients'
+    },
   ];
 
   export const categoryOptionsMap = {

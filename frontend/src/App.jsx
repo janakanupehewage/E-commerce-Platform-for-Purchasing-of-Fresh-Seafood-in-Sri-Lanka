@@ -27,6 +27,8 @@ import PaypalReturnPage from "./pages/user-side/paypal-return"
 import PaymentSuccessPage from "./pages/user-side/payment-success"
 import SearchProducts from "./pages/user-side/search"
 import SeafoodPrediction from "./pages/user-side/seafood-prediction"
+import UserNutrientPage from "./pages/user-side/calculate-nutriants"
+import AdminManageNutrient from "./pages/admin-side/ManageNutriants"
 
 
 
@@ -76,6 +78,7 @@ function App() {
           <Route path="orders" element={<AdminOrders/>}/>
           <Route path="features" element={<AdminFeatures/>}/>
           <Route path="ui" element={<UIComponents/>}/>
+          <Route path="manageNutrients" element={<AdminManageNutrient/>}/>
         </Route>
 
         <Route path="/shop" element={
@@ -93,6 +96,7 @@ function App() {
           <Route path="payment-success" element={<PaymentSuccessPage/>} />
           <Route path="search" element={<SearchProducts/>} />
           <Route path="prediction" element={<SeafoodPrediction/>} />
+          <Route path="calculate-nutrients" element={<UserNutrientPage/>} />
         
         </Route>
 
