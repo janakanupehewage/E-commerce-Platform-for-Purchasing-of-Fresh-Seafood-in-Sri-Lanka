@@ -60,7 +60,7 @@ const AdminManageNutrient = () => {
 
   return (
     <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Admin Panel</h1>
+      <h1 className="text-2xl font-bold mb-4">Manage Nutrients</h1>
       <form onSubmit={handleSubmit} className="mb-8 space-y-4">
         <div>
           <label className="block text-sm font-medium">Name</label>

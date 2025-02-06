@@ -11,72 +11,56 @@ const UserNutrientPage = () => {
   const [selectedItems, setSelectedItems] = useState([]);
   const navigate = useNavigate();
 
-  // Log the cart items for debugging
-  console.log("Cart Items:", cartItems);
-
   useEffect(() => {
-    // Check if the cart has items and the user is logged in
     if (user && cartItems?.items?.length > 0) {
       const formattedCartItems = cartItems.items.map((item) => ({
-        name: item.title, // Use title instead of ID
-        quantity: item.quantity, // Default quantity to 1 if not provided
+        name: item.title,
+        quantity: item.quantity,
       }));
 
-      console.log(formattedCartItems, "Formatted Cart Items"); // Debugging log
-      // API call to calculate nutrients
       axios
         .post(
           "http://localhost:5000/api/shop/nutrientCalculation/calculate-nutrients",
           { cartItems: formattedCartItems }
         )
         .then((response) => {
-          //console.log("API Response:", response.data);
-          if(response){
+          if (response) {
             setTotalNutrients(response.data.totalNutrients);
             setSelectedItems(response.data.selectedItems);
-          }
-          else{
+          } else {
             setTotalNutrients({});
-          setSelectedItems([]);
+            setSelectedItems([]);
           }
-          
         })
         .catch((error) => {
-          // console.error(
-          //   "Error fetching nutritional details:",
-          //   error.response?.data || error.message
-          // );
+          // Handle error if needed
         });
     } else {
-      // Reset states if cart is empty or user is not logged in
       setSelectedItems([]);
       setTotalNutrients({});
     }
   }, [user, cartItems]);
 
-  // Redirect to login if user is not logged in
   if (!user) {
     return (
-      <div className="p-8 flex flex-col md:flex-row items-center">
+      <div className="p-8 flex flex-col md:flex-row items-center justify-center bg-gray-100 rounded-lg shadow-lg">
         <div className="mb-6 md:mb-0 md:mr-6">
           <img
             src={nutrientImage}
             alt="Login required"
-            className="h-90 w-90 object-cover rounded shadow-lg"
-            
+            className="h-80 w-80 object-cover rounded-lg shadow-md"
           />
         </div>
         <div className="text-center md:text-left">
-          <h1 className="text-2xl font-bold mb-4 text-gray-800">
+          <h1 className="text-3xl font-bold mb-6 text-gray-800">
             Login to View Your Nutritional Details
           </h1>
-          <p className="text-gray-600 mb-4">
-            To access personalized nutritional information based on your cart
-            items, please log in to your account.
+          <p className="text-lg text-gray-600 mb-6">
+            To access personalized nutritional information based on your cart items, please log in to your account.
           </p>
           <button
             onClick={() => navigate("/auth/login")}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
           >
             Go to Login Page
           </button>
@@ -85,55 +69,72 @@ const UserNutrientPage = () => {
     );
   }
 
-  // Render empty cart message
-  if (cartItems?.items?.length === 0) {
+  if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
     return (
-      <div className="p-8 text-center">
-        <h1 className="text-2xl font-bold mb-4">Your Cart is Empty</h1>
-        <p className="text-gray-600 mb-4">
+      <div className="p-8 text-center bg-gray-100 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-6">Your Cart is Empty</h1>
+        <p className="text-lg text-gray-600 mb-6">
           Start adding items to your cart to view nutritional details.
         </p>
         <button
           onClick={() => navigate("/shop/home")}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-200"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300"
         >
           Go to Shop By Category
         </button>
       </div>
     );
   }
-console.log(selectedItems,"selected")
-  // Render nutritional information
-  return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Nutritional Details for Cart</h1>
 
-      <h2 className="text-xl font-semibold mb-4">Selected Items</h2>
+  const hasNutritionalData = (item) => {
+    return (
+      item.protein && item.protein !== "N/A" &&
+      item.omega3 && item.omega3 !== "N/A" &&
+      item.calories && item.calories !== "N/A" &&
+      item.vitamins && item.vitamins !== "N/A"
+    );
+  };
+
+  return (
+    <div className="p-8 bg-white rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">Nutritional Details for Cart</h1>
+
+      <h2 className="text-2xl font-semibold mb-4 text-gray-700">Selected Items</h2>
       <div>
         {selectedItems.length > 0 ? (
-          selectedItems.map((item, index) => (
-            <div
-              key={index}
-              className="mb-4 p-4 border border-gray-300 rounded"
-            >
-              <h3 className="text-lg font-semibold">{item.title}</h3>
-              <p>Protein: {item.protein || "N/A"} g</p>
-              <p>Omega-3: {item.omega3 || "N/A"} g</p>
-              <p>Calories: {item.calories || "N/A"} kcal</p>
-              <p>Vitamins: {item.vitamins || "N/A"} mg</p>
-            </div>
-          ))
+          selectedItems.filter(hasNutritionalData).length > 0 ? (
+            selectedItems.map((item, index) => {
+              const protein = item.protein === "N/A" ? "No data available" : item.protein;
+              const omega3 = item.omega3 === "N/A" ? "No data available" : item.omega3;
+              const calories = item.calories === "N/A" ? "No data available" : item.calories;
+              const vitamins = item.vitamins === "N/A" ? "No data available" : item.vitamins;
+
+              return (
+                <div key={index} className="mb-6 p-6 bg-gray-50 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                  <h3 className="text-xl font-semibold text-gray-800">{item.title}</h3>
+                  <p className="text-gray-700">Protein: {protein}</p>
+                  <p className="text-gray-700">Omega-3: {omega3}</p>
+                  <p className="text-gray-700">Calories: {calories}</p>
+                  <p className="text-gray-700">Vitamins: {vitamins}</p>
+                </div>
+              );
+            })
+          ) : (
+            <p className="text-lg text-gray-600 italic font-semibold mt-4 mb-4">
+              No nutritional information available for the selected items.
+            </p>
+          )
         ) : (
-          <p>No nutritional information available for the selected items.</p>
+          <p className="text-lg text-gray-600">No items selected.</p>
         )}
       </div>
 
-      <h2 className="text-xl font-semibold mb-4">Total Nutritional Information</h2>
-      <div className="p-4 border border-gray-300 rounded">
-        <p>Total Protein: {totalNutrients.protein || 0} g</p>
-        <p>Total Omega-3: {totalNutrients.omega3 || 0} g</p>
-        <p>Total Calories: {totalNutrients.calories || 0} kcal</p>
-        <p>Total Vitamins: {totalNutrients.vitamins || 0} mg</p>
+      <h2 className="text-2xl font-semibold mb-4 text-gray-700">Total Nutritional Information</h2>
+      <div className="p-6 bg-gray-50 border border-gray-300 rounded-lg shadow-md">
+        <p className="text-gray-700">Total Protein: {totalNutrients.protein || 0} g</p>
+        <p className="text-gray-700">Total Omega-3: {totalNutrients.omega3 || 0} g</p>
+        <p className="text-gray-700">Total Calories: {totalNutrients.calories || 0} kcal</p>
+        <p className="text-gray-700">Total Vitamins: {totalNutrients.vitamins || 0} mg</p>
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import { BadgeCheck, ChartNoAxesCombined, LayoutDashboard, ShoppingBasket,} from "lucide-react";
+import { BadgeCheck, ChartNoAxesCombined, LayoutDashboard, ShoppingBasket, Wallpaper, Fish} from "lucide-react";
 import { Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
@@ -26,13 +26,13 @@ const adminSidebarMenuItems = [
     id: "ui",
     label: "UI",
     path: "/admin/ui",
-    icon: <BadgeCheck />,
+    icon: <Wallpaper />,
   },
   {
     id: "manageNutrient",
     label: "Manage Nutrients",
     path: "/admin/manageNutrients",
-    icon: <BadgeCheck />,
+    icon: <Fish />,
   },
 ];
 
