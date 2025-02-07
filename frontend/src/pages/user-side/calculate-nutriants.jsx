@@ -43,7 +43,7 @@ const UserNutrientPage = () => {
 
   if (!user) {
     return (
-      <div className="p-8 flex flex-col md:flex-row items-center justify-center bg-gray-100 rounded-lg shadow-lg">
+      <div className="p-8 flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg">
         <div className="mb-6 md:mb-0 md:mr-6">
           <img
             src={nutrientImage}
@@ -52,10 +52,10 @@ const UserNutrientPage = () => {
           />
         </div>
         <div className="text-center md:text-left">
-          <h1 className="text-3xl font-bold mb-6 text-gray-800">
+          <h1 className="text-3xl font-bold mb-6 text-white">
             Login to View Your Nutritional Details
           </h1>
-          <p className="text-lg text-gray-600 mb-6">
+          <p className="text-lg text-white mb-6">
             To access personalized nutritional information based on your cart items, please log in to your account.
           </p>
           <button
@@ -71,9 +71,9 @@ const UserNutrientPage = () => {
 
   if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
     return (
-      <div className="p-8 text-center bg-gray-100 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold mb-6">Your Cart is Empty</h1>
-        <p className="text-lg text-gray-600 mb-6">
+      <div className="p-8 text-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg">
+        <h1 className="text-3xl font-bold mb-6 text-white">Your Cart is Empty</h1>
+        <p className="text-lg text-white mb-6">
           Start adding items to your cart to view nutritional details.
         </p>
         <button
@@ -96,10 +96,10 @@ const UserNutrientPage = () => {
   };
 
   return (
-    <div className="p-8 bg-white rounded-lg shadow-lg">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Nutritional Details for Cart</h1>
+    <div className="p-8 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold mb-6 text-white">Nutritional Details for Cart</h1>
 
-      <h2 className="text-2xl font-semibold mb-4 text-gray-700">Selected Items</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-white">Selected Items</h2>
       <div>
         {selectedItems.length > 0 ? (
           selectedItems.filter(hasNutritionalData).length > 0 ? (
@@ -110,7 +110,10 @@ const UserNutrientPage = () => {
               const vitamins = item.vitamins === "N/A" ? "No data available" : item.vitamins;
 
               return (
-                <div key={index} className="mb-6 p-6 bg-gray-50 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+                <div
+                  key={index}
+                  className="mb-6 p-6 bg-gradient-to-r from-yellow-400 via-red-400 to-pink-500 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition duration-300"
+                >
                   <h3 className="text-xl font-semibold text-gray-800">{item.title}</h3>
                   <p className="text-gray-700">Protein: {protein}</p>
                   <p className="text-gray-700">Omega-3: {omega3}</p>
@@ -129,7 +132,7 @@ const UserNutrientPage = () => {
         )}
       </div>
 
-      <h2 className="text-2xl font-semibold mb-4 text-gray-700">Total Nutritional Information</h2>
+      <h2 className="text-2xl font-semibold mb-4 text-white">Total Nutritional Information</h2>
       <div className="p-6 bg-gray-50 border border-gray-300 rounded-lg shadow-md">
         <p className="text-gray-700">Total Protein: {totalNutrients.protein || 0} g</p>
         <p className="text-gray-700">Total Omega-3: {totalNutrients.omega3 || 0} g</p>

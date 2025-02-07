@@ -60,7 +60,7 @@ const getDashboardStats = async (req, res) => {
       totalOrders,
       totalRevenue: totalRevenue[0]?.total || 0,
       ordersByMonth,
-      revenueByMonth,  // ✅ Add this line
+      revenueByMonth,  
     });
   } catch (error) {
     console.error('Error fetching dashboard stats:', error);

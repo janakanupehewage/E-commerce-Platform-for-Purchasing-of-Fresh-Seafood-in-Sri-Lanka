@@ -33,7 +33,7 @@ const calculateNutrients = async (req, res) => {
           quantity: item.quantity,
         });
 
-        console.log(`Seafood with name "${item.name}" not found, using default values.`);
+        //console.log(`Seafood with name "${item.name}" not found, using default values.`);
         continue;
       }
 

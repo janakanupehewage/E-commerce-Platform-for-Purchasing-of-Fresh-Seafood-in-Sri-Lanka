@@ -44,7 +44,7 @@ function MenuItems(){
       shoppingViewHeaderMenuItems.map((menuItem) => (
       <Label
         onClick={()=>handleNavigate(menuItem)}
-        className="text-sm font-medium cursor-pointer" 
+        className="text-sm font-medium cursor-pointer hover:text-cyan-400" 
         key={menuItem.id} 
         >
         {menuItem.label}
@@ -64,24 +64,17 @@ function HeaderRightContent(){
 
   function handleLogout(){
     dispatch(logoutUser());
-    //console.log(cartItems, "cartItems")
-    //console.log(user, "user")
-    
   }
-
 
   if(user?.id){
   useEffect(()=>{
     dispatch(fetchCartItems(user?.id));
   },[dispatch]);}
 
-  //console.log(cartItems, "test");
-
   return (<div className="flex lg:items-center lg:flex-row flex-col gap-4">
-    
     { user ? 
     <Sheet open={openCartSheet} onOpenChange={() => setOpenCartSheet(false)}>
-      <Button onClick={() => setOpenCartSheet(true)} variant="outline" size="icon" className="relative">
+      <Button onClick={() => setOpenCartSheet(true)} variant="outline" size="icon" className="relative text-teal-500">
         <ShoppingCart className="w-6 h-6" />
         <span className="absolute top-[-4px] right-[2px] font-bold text-sm">{cartItems?.items?.length || 0}</span>
         <span className="sr-only">User cart</span>
@@ -92,25 +85,23 @@ function HeaderRightContent(){
       />
     </Sheet>
  : 
- 
  (
   <Button 
     disabled 
     variant="outline" 
     size="icon" 
-    className="relative"
+    className="relative text-teal-500"
   >
     <ShoppingCart className="w-6 h-6" />
     <span className="absolute top-[-4px] right-[2px] font-bold text-sm">0</span>
     <span className="sr-only">User cart</span>
   </Button>
 )
- 
  }
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Avatar className="bg-black">
-          <AvatarFallback className="bg-red-400 text-white font-extrabold cursor-pointer">
+          <AvatarFallback className="bg-green-400 text-white font-extrabold cursor-pointer">
             { user?.userName ? 
             user?.userName[0].toUpperCase() : <CircleUser/>
             }
@@ -130,8 +121,8 @@ function HeaderRightContent(){
         {user?.userName ?  
         
           <>
-        <DropdownMenuItem onClick={()=>navigate("/shop/account")}>
-          <CircleUser className="mr-2 h-4 w-4"/>
+        <DropdownMenuItem onClick={()=>navigate("/shop/account")}> 
+          <CircleUser className="mr-2 h-4 w-4 text-green-400"/>
           My Account
         </DropdownMenuItem>
         <DropdownMenuSeparator />
@@ -144,13 +135,13 @@ function HeaderRightContent(){
         : 
         
         <>
-        <DropdownMenuItem onClick={()=>navigate("/auth/login")}>
-          <CircleUser className="mr-2 h-4 w-4"/>
+        <DropdownMenuItem onClick={()=>navigate("/auth/login")}> 
+          <CircleUser className="mr-2 h-4 w-4 text-green-400"/>
           Log in
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={()=>navigate("/auth/register")}>
-          <FileUser className="mr-2 h-4 w-4"/>
+        <DropdownMenuItem onClick={()=>navigate("/auth/register")}> 
+          <FileUser className="mr-2 h-4 w-4 text-green-400"/>
           Register
         </DropdownMenuItem>
         </>
@@ -159,22 +150,16 @@ function HeaderRightContent(){
         
       </DropdownMenuContent>
     </DropdownMenu>
-      
-
   </div>
   );
 }
-
 
 function ShoppingHeader() {
 
   const {isAuthenticated} = useSelector((state)=>state.auth);
 
-  //console.log(user, 'user');
-
-
   return (
-    <header className="fixed top-0 z-40 w-full border-b bg-blue-400">
+    <header className="fixed top-0 z-40 w-full border-b bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
           {
@@ -186,7 +171,7 @@ function ShoppingHeader() {
               )
             )
           }
-          <span className="font-bold">OceanFishMarket.lk</span>
+          <span className="font-bold text-white">OceanFishMarket.lk</span>
         </Link>
         <Sheet>
           <SheetTrigger asChild>
@@ -211,4 +196,4 @@ function ShoppingHeader() {
   )
 }
 
-export default ShoppingHeader
+export default ShoppingHeader;
