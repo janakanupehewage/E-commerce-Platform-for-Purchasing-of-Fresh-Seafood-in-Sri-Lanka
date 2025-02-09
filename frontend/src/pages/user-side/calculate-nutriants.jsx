@@ -43,7 +43,7 @@ const UserNutrientPage = () => {
 
   if (!user) {
     return (
-      <div className="p-8 flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg">
+      <div className="min-h-screen p-8 flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-blue-300 via-green-300 to-red-300 rounded-lg shadow-lg">
         <div className="mb-6 md:mb-0 md:mr-6">
           <img
             src={nutrientImage}
@@ -71,7 +71,7 @@ const UserNutrientPage = () => {
 
   if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
     return (
-      <div className="p-8 text-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 rounded-lg shadow-lg">
+      <div className="min-h-screen p-8 text-center bg-gradient-to-r from-blue-300 via-green-300 to-red-300 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold mb-6 text-white">Your Cart is Empty</h1>
         <p className="text-lg text-white mb-6">
           Start adding items to your cart to view nutritional details.
@@ -96,7 +96,7 @@ const UserNutrientPage = () => {
   };
 
   return (
-    <div className="p-8 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 rounded-lg shadow-lg">
+    <div className="min-h-screen p-8 bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-6 text-white">Nutritional Details for Cart</h1>
 
       <h2 className="text-2xl font-semibold mb-4 text-white">Selected Items</h2>

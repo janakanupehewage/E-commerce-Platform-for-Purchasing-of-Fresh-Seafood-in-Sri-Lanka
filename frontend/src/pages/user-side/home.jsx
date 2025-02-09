@@ -8,6 +8,14 @@ import crabIcon from "../../assets/crab.png";
 import musselIcon from "../../assets/mussel.png";
 import scallopIcon from "../../assets/scallop.png";
 import lobsterIcon from "../../assets/lobster.png";
+import proteinChart from "../../assets/vitamins.jpg";
+import FreshOceanImage from '../../assets/fresh_ocean.jpg';
+import SustainablePracticeImage from '../../assets/sustainable_practice.jpg';
+import FastDeliveryImage from '../../assets/fast_delivery.jpg';
+import orderIcon from "../../assets/order_icon.png";
+import processingIcon from "../../assets/processing_icon.png";
+import deliveryIcon from "../../assets/delivery_icon.png";
+import contactBg from "../../assets/contactBg1.jpg";
 import { Button } from '@/components/ui/button';
 import { ChevronLeftIcon, ChevronRightIcon, Fish } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -19,6 +27,7 @@ import { addToCart, fetchCartItems } from '@/store/shop/cart-slice';
 import { useToast } from '@/hooks/use-toast';
 import ProductDetailsDialog from '@/components/user-view/product-details';
 import { getBannerImages } from '@/store/common-slice';
+import { motion } from 'framer-motion';
 
 const categoriesWithIcon = [
   { id: "fish", label: "Fish", icon: fishIcon, isImage: true },
@@ -185,6 +194,112 @@ function ShoppingHome() {
           </div>
         </div>
       </section>
+      
+      <section className="py-12 bg-gradient-to-r from-blue-100 via-teal-100 to-blue-200">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Why Choose Us?</h2>
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-6" 
+            initial={{ opacity: 0, y: 50 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.8 }}>
+            
+            <div className="bg-gradient-to-t from-green-300 to-teal-400 rounded-lg shadow-lg p-6 text-center">
+              <div className="h-40 bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${FreshOceanImage})` }}></div>
+              <h3 className="text-xl font-semibold mb-4 text-white">Fresh From the Ocean</h3>
+              <p className="text-white">We source our seafood directly from the coast, ensuring the freshest quality.</p>
+            </div>
+            
+            <div className="bg-gradient-to-t from-purple-300 to-pink-400 rounded-lg shadow-lg p-6 text-center">
+              <div className="h-40 bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${SustainablePracticeImage})` }}></div>
+              <h3 className="text-xl font-semibold mb-4 text-white">Sustainable Practices</h3>
+              <p className="text-white">Our commitment to sustainable fishing helps protect marine life.</p>
+            </div>
+            
+            <div className="bg-gradient-to-t from-yellow-300 to-orange-400 rounded-lg shadow-lg p-6 text-center">
+              <div className="h-40 bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${FastDeliveryImage})` }}></div>
+              <h3 className="text-xl font-semibold mb-4 text-white">Fast Delivery</h3>
+              <p className="text-white">We deliver your seafood quickly while maintaining peak freshness.</p>
+            </div>
+
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-r from-blue-50 to-teal-50">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-4xl font-bold text-gray-800 mb-12">How Our Platform Works</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+              <img src={orderIcon} alt="Place Your Order" className="w-20 mx-auto mb-4" />
+              <h3 className="text-2xl font-semibold text-blue-700 mb-2">Place Your Order</h3>
+              <p className="text-gray-600">Select your favorite seafood from our marketplace.</p>
+            </div>
+            <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+              <img src={processingIcon} alt="We Source & Pack" className="w-20 mx-auto mb-4" />
+              <h3 className="text-2xl font-semibold text-blue-700 mb-2">We Source & Pack</h3>
+              <p className="text-gray-600">Freshly sourced, hygienically packed for you.</p>
+            </div>
+            <div className="bg-white p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-transform transform hover:scale-105">
+              <img src={deliveryIcon} alt="Delivered Fresh" className="w-20 mx-auto mb-4" />
+              <h3 className="text-2xl font-semibold text-blue-700 mb-2">Delivered Fresh</h3>
+              <p className="text-gray-600">Fast, secure delivery straight to your doorstep.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      
+
+      
+
+      <section className="py-16 bg-gradient-to-r from-cyan-50 via-blue-100 to-cyan-50">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-10 underline decoration-blue-400 decoration-4">Nutritional Benefits of Seafood</h2>
+          
+          <motion.div 
+            className="flex flex-col md:flex-row items-center justify-center gap-10 bg-white shadow-2xl rounded-3xl p-8 md:p-12"
+            initial={{ opacity: 0, scale: 0.8 }} 
+            whileInView={{ opacity: 1, scale: 1 }} 
+            transition={{ duration: 1 }}>
+            
+            <div className="w-full md:w-1/2">
+              <img src={proteinChart} alt="Fish Protein Chart" className="w-full rounded-2xl shadow-xl transform hover:scale-105 transition duration-500 ease-in-out" />
+            </div>
+            
+            <div className="w-full md:w-1/2 text-center md:text-left">
+              <h3 className="text-3xl font-bold text-blue-800 mb-4">🌊 Packed with Essential Nutrients</h3>
+              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                Seafood is a powerhouse of high-quality protein, omega-3 fatty acids, vitamins, and minerals.
+                It promotes heart health ❤️, supports brain function 🧠, and enhances overall well-being 🌟.
+              </p>
+              <ul className="list-disc list-inside text-left text-gray-600 space-y-2">
+                <li>Rich in Omega-3 Fatty Acids for Heart Health</li>
+                <li>Excellent Source of Lean Protein</li>
+                <li>Boosts Brain Development & Cognitive Function</li>
+                <li>Loaded with Essential Vitamins & Minerals</li>
+              </ul>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-cover bg-center text-white" style={{ backgroundImage: `url(${contactBg})` }}>
+        <div className="bg-black bg-opacity-60 p-10 rounded-2xl shadow-xl mx-6 md:mx-auto max-w-3xl text-center">
+          <h2 className="text-4xl font-bold mb-4">Get in Touch</h2>
+          <p className="mb-6 text-lg">Have questions or need bulk orders? Reach out to us anytime!</p>
+          <button 
+            className="px-8 py-3 bg-teal-500 text-white rounded-full shadow-md hover:bg-teal-400 transition-transform transform hover:scale-105"
+            onClick={()=>navigate("/shop/contact")}
+          >
+            Contact Us Now
+          </button>
+        </div>
+      </section>
+
+
+
+
       <ProductDetailsDialog 
         open={openDetailsDialog} 
         setOpen={setOpenDetailsDialog} 
