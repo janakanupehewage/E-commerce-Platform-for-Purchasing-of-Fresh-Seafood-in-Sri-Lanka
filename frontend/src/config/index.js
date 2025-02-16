@@ -62,10 +62,10 @@ export const registerFormControls = [
       componentType: "select",
       options: [
         { id: "fish", label: "Fish" },
-        { id: "crab", label: "Crab" },
-        { id: "mussels", label: "Mussels" },
-        { id: "scallops", label: "Scallops" },
-        { id: "lobster", label: "Lobster" },
+        { id: "shellfish", label: "Shellfish" },
+        { id: "cephalopods", label: "Cephalopods" },
+        { id: "mollusks", label: "Mollusks" },
+        { id: "driedandsaltedseafood", label: "Dried & Salted Seafood" },
       ],
     },
     
@@ -131,19 +131,19 @@ export const registerFormControls = [
 
   export const categoryOptionsMap = {
     fish: "Fish",
-    crab: "Crab",
-    mussels: "Mussels",
-    scallops: "Scallops",
-    lobster: "Lobster",
+    shellfish: "Shellfish",
+    cephalopods: "Cephalopods",
+    mollusks: "Mollusks",
+    driedandsaltedseafood: "driedandsaltedseafood",
   };
 
   export const filterOptions = {
     category: [
       { id: "fish", label: "Fish" },
-      { id: "crab", label: "Crab" },
-      { id: "mussels", label: "Mussels" },
-      { id: "scallops", label: "Scallops" },
-      { id: "lobster", label: "Lobster" },
+      { id: "shellfish", label: "Shellfish" },
+      { id: "cephalopods", label: "Cephalopods" },
+      { id: "mollusks", label: "Mollusks" },
+      { id: "driedandsaltedseafood", label: "Dried & Salted Seafood" },
     ],
   };
 

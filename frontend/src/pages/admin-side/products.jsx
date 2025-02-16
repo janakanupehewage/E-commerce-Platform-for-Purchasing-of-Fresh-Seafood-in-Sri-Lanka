@@ -28,10 +28,20 @@ function AdminProducts(){
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [imageLoadingState, setImageLoadingState] = useState(false);
   const [currentEditedId, setCurrentEditedId] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const {productList} = useSelector((state)=>state.adminProducts);
   const dispatch = useDispatch();
   const {toast} = useToast();
 
+  //const categories = ["fish", "shellfish", "Cephalopods", "Mollusks", "Dried & Salted Seafood"];
+
+  const categories = [
+    { label: "Fish", value: "fish" },
+    { label: "Shellfish", value: "shellfish" },
+    { label: "Cephalopods", value: "cephalopods" },
+    { label: "Mollusks", value: "mollusks" },
+    { label: "Dried & Salted Seafood", value: "driedandsaltedseafood" },
+  ];
 
   function onSubmit(event){
     event.preventDefault();
@@ -87,28 +97,72 @@ function AdminProducts(){
     dispatch(fetchAllProducts())
   }, [dispatch])
 
-  console.log(formData, "productList");
+  //console.log(formData, "productList");
+
+  const filteredProducts = selectedCategory
+  ? productList.filter((product) => product.category.toLowerCase() === selectedCategory.toLowerCase())
+  : productList;
+
 
   return <Fragment>
+
+    {/* Category Selection Section */}
+    <div className="mb-6">
+    <h2 className="text-2xl font-bold text-gray-800 mb-4">Categories</h2>
+    <div className="flex gap-4 overflow-x-auto pb-2">
+      {categories.map(({ label, value }) => (
+        <button
+          key={value}
+          onClick={() => setSelectedCategory(value)}
+          className={`px-5 py-2 rounded-full text-sm font-semibold transition-all
+            ${
+              selectedCategory === value
+                ? "bg-blue-500 text-white shadow-md"
+                : "bg-gray-200 text-gray-700 hover:bg-blue-100"
+            }`}
+        >
+          {label}
+        </button>
+      ))}
+      <button
+        onClick={() => setSelectedCategory(null)}
+        className={`px-5 py-2 rounded-full text-sm font-semibold transition-all
+          ${
+            selectedCategory === null
+              ? "bg-blue-500 text-white shadow-md"
+              : "bg-gray-200 text-gray-700 hover:bg-blue-100"
+          }`}
+      >
+        All Products
+      </button>
+    </div>
+  </div>
+
+
+
+
     <div className="mb-5 w-full flex justify-end">
       <Button onClick={()=>setOpenCreateProductsDialog(true)}>
         Add new Product
       </Button>
     </div>
+    {/* Product List */}
     <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-4">
-        {
-          productList && productList.length > 0 ?
-          productList.map((productItem) => (
-          <AdminProductTile 
-            setFormData={setFormData} 
-            setOpenCreateProductsDialog={setOpenCreateProductsDialog} 
-            setCurrentEditedId={setCurrentEditedId} 
-            product={productItem}
-            handleDelete={handleDelete}
-          />
-        )) : null
-        }
-    </div>
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((productItem) => (
+            <AdminProductTile
+              key={productItem._id}
+              setFormData={setFormData}
+              setOpenCreateProductsDialog={setOpenCreateProductsDialog}
+              setCurrentEditedId={setCurrentEditedId}
+              product={productItem}
+              handleDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <p>No products available for this category.</p>
+        )}
+      </div>
     <Sheet 
       open={openCreateProductsDialog} 
       onOpenChange={() => {

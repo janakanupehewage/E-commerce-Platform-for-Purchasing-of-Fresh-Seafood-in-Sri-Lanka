@@ -96,7 +96,7 @@ const UserNutrientPage = () => {
   };
 
   return (
-    <div className="min-h-screen p-8 bg-gradient-to-r from-green-300 via-blue-400 to-purple-500 rounded-lg shadow-lg">
+    <div className="min-h-screen p-8 bg-gradient-to-r from-green-300 via-blue-350 to-purple-400 rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold mb-6 text-white">Nutritional Details for Cart</h1>
 
       <h2 className="text-2xl font-semibold mb-4 text-white">Selected Items</h2>
@@ -114,11 +114,11 @@ const UserNutrientPage = () => {
                   key={index}
                   className="mb-6 p-6 bg-gradient-to-r from-yellow-400 via-red-400 to-pink-500 border border-gray-300 rounded-lg shadow-md hover:shadow-lg transition duration-300"
                 >
-                  <h3 className="text-xl font-semibold text-gray-800">{item.title}</h3>
-                  <p className="text-gray-700">Protein: {protein}</p>
-                  <p className="text-gray-700">Omega-3: {omega3}</p>
-                  <p className="text-gray-700">Calories: {calories}</p>
-                  <p className="text-gray-700">Vitamins: {vitamins}</p>
+                  <h3 className="text-xl font-semibold text-gray-800">{item.title} Per 100g</h3>
+                  <p className="text-gray-700">Protein: {protein} g</p>
+                  <p className="text-gray-700">Omega-3: {omega3} mg</p>
+                  <p className="text-gray-700">Calories: {calories} kcal</p>
+                  <p className="text-gray-700">Vitamin E: {vitamins} mg</p>
                 </div>
               );
             })
@@ -135,9 +135,9 @@ const UserNutrientPage = () => {
       <h2 className="text-2xl font-semibold mb-4 text-white">Total Nutritional Information</h2>
       <div className="p-6 bg-gray-50 border border-gray-300 rounded-lg shadow-md">
         <p className="text-gray-700">Total Protein: {totalNutrients.protein || 0} g</p>
-        <p className="text-gray-700">Total Omega-3: {totalNutrients.omega3 || 0} g</p>
+        <p className="text-gray-700">Total Omega-3: {totalNutrients.omega3 || 0} mg</p>
         <p className="text-gray-700">Total Calories: {totalNutrients.calories || 0} kcal</p>
-        <p className="text-gray-700">Total Vitamins: {totalNutrients.vitamins || 0} mg</p>
+        <p className="text-gray-700">Total Vitamin E: {totalNutrients.vitamins || 0} mg</p>
       </div>
     </div>
   );

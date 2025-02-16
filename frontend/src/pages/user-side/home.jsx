@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import bannerOne from "../../assets/banner1.jpg";
-import bannerTwo from "../../assets/banner2.jpg";
-import bannerThree from "../../assets/banner3.jpg";
+import bannerOne from "../../assets/newBanner1.png";
+import bannerTwo from "../../assets/newBanner2.png";
+import bannerThree from "../../assets/newBanner3.png";
 import bannerFour from "../../assets/banner4.jpg";
 import fishIcon from "../../assets/fish.png";
 import crabIcon from "../../assets/crab.png";
-import musselIcon from "../../assets/mussel.png";
+import cephalopodsIcon from "../../assets/cephalopods.png";
 import scallopIcon from "../../assets/scallop.png";
-import lobsterIcon from "../../assets/lobster.png";
+import driedFishIcon from "../../assets/driedFishNew.png";
 import proteinChart from "../../assets/vitamins.jpg";
 import FreshOceanImage from '../../assets/fresh_ocean.jpg';
 import SustainablePracticeImage from '../../assets/sustainable_practice.jpg';
@@ -31,10 +31,10 @@ import { motion } from 'framer-motion';
 
 const categoriesWithIcon = [
   { id: "fish", label: "Fish", icon: fishIcon, isImage: true },
-  { id: "crab", label: "Crab", icon: crabIcon, isImage: true },
-  { id: "lobster", label: "Lobster", icon: lobsterIcon, isImage: true },
-  { id: "scallops", label: "Scallops", icon: scallopIcon, isImage: true },
-  { id: "mussels", label: "Mussels", icon: musselIcon, isImage: true },
+  { id: "shellfish", label: "Shellfish", icon: crabIcon, isImage: true },
+  { id: "cephalopods", label: "Cephalopods", icon: cephalopodsIcon, isImage: true },
+  { id: "mollusks", label: "Mollusks", icon: scallopIcon, isImage: true },
+  { id: "driedandsaltedseafood", label: "Dried & Salted Seafood", icon: driedFishIcon, isImage: true },
 ];
 
 function ShoppingHome() {
@@ -178,7 +178,7 @@ function ShoppingHome() {
             {productList && productList.length > 0
               ? productList
               .filter((product) =>
-                ["fish", "crab", "lobster", "scallops", "mussels"].includes(product.category)
+                ["fish", "shellfish", "cephalopods", "mollusks", "driedandsaltedseafood"].includes(product.category)
               ) // Filter only the relevant categories
               .sort((a, b) => a.price - b.price) // Sort by price in ascending order
               .slice(0, 4) // Select the top 4 cheapest products

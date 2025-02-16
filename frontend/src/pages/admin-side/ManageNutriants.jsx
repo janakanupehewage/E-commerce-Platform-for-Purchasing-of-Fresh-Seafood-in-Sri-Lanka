@@ -59,103 +59,67 @@ const AdminManageNutrient = () => {
   }, []);
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Manage Nutrients</h1>
-      <form onSubmit={handleSubmit} className="mb-8 space-y-4">
-        <div>
-          <label className="block text-sm font-medium">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Protein (g)</label>
-          <input
-            type="number"
-            name="protein"
-            value={form.protein}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Omega-3 (g)</label>
-          <input
-            type="number"
-            name="omega3"
-            value={form.omega3}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Calories</label>
-          <input
-            type="number"
-            name="calories"
-            value={form.calories}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Vitamins (mg)</label>
-          <input
-            type="number"
-            name="vitamins"
-            value={form.vitamins}
-            onChange={handleChange}
-            required
-            className="w-full px-4 py-2 border rounded"
-          />
-        </div>
+    <div className="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+      <h1 className="text-3xl font-bold mb-6 text-center">Manage Nutrients</h1>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {[
+          { label: "Name", name: "name" },
+          { label: "Protein (g)", name: "protein", type: "number" },
+          { label: "Omega-3 (mg)", name: "omega3", type: "number" },
+          { label: "Calories", name: "calories", type: "number" },
+          { label: "Vitamin E (mg)", name: "vitamins", type: "number" },
+        ].map(({ label, name, type = "text" }) => (
+          <div key={name}>
+            <label className="block text-sm font-semibold text-gray-700">{label}</label>
+            <input
+              type={type}
+              name={name}
+              value={form[name]}
+              onChange={handleChange}
+              required
+              className="w-full px-4 py-2 mt-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            />
+          </div>
+        ))}
         <button
           type="submit"
-          className="px-6 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="w-full px-6 py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600"
         >
           {isEditing ? "Update Seafood" : "Add Seafood"}
         </button>
       </form>
-      <h2 className="text-xl font-bold mb-4">Seafood List</h2>
-      <table className="min-w-full table-auto border-collapse border border-gray-300">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="border border-gray-300 px-4 py-2">Name</th>
-            <th className="border border-gray-300 px-4 py-2">Protein (g)</th>
-            <th className="border border-gray-300 px-4 py-2">Omega-3 (g)</th>
-            <th className="border border-gray-300 px-4 py-2">Calories</th>
-            <th className="border border-gray-300 px-4 py-2">Vitamins (mg)</th>
-            <th className="border border-gray-300 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {seafoodList.map((item) => (
-            <tr key={item._id}>
-              <td className="border border-gray-300 px-4 py-2">{item.name}</td>
-              <td className="border border-gray-300 px-4 py-2">{item.protein}</td>
-              <td className="border border-gray-300 px-4 py-2">{item.omega3}</td>
-              <td className="border border-gray-300 px-4 py-2">{item.calories}</td>
-              <td className="border border-gray-300 px-4 py-2">{item.vitamins}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                <button
-                  onClick={() => startEdit(item)}
-                  className="mr-2 px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
-                >
-                  Edit
-                </button>
-              </td>
+
+      <h2 className="text-2xl font-bold mt-8 mb-4 text-center">Seafood List</h2>
+      <div className="overflow-x-auto">
+        <table className="min-w-full bg-white border rounded-lg overflow-hidden">
+          <thead className="bg-blue-500 text-white">
+            <tr>
+              {["Name", "Protein (g)", "Omega-3 (mg)", "Calories", "Vitamin E (mg)", "Actions"].map((header) => (
+                <th key={header} className="px-4 py-2 text-left font-semibold">{header}</th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {seafoodList.map((item) => (
+              <tr key={item._id} className="border-t">
+                <td className="px-4 py-2">{item.name}</td>
+                <td className="px-4 py-2">{item.protein}</td>
+                <td className="px-4 py-2">{item.omega3}</td>
+                <td className="px-4 py-2">{item.calories}</td>
+                <td className="px-4 py-2">{item.vitamins}</td>
+                <td className="px-4 py-2">
+                  <button
+                    onClick={() => startEdit(item)}
+                    className="px-4 py-1 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+                  >
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

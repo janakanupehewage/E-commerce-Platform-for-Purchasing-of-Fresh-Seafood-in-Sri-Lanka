@@ -112,7 +112,7 @@ const capturePayment = async(req, res)=>{
         }
 
         order.paymentStatus = "paid";
-        order.orderStatus = "confirmed";
+        order.orderStatus = "paid";
         order.paymentId = paymentId;
         order.payerId = payerId;
 

@@ -22,12 +22,12 @@ function ShoppingProductTile({product, handleGetProductDetails, handleAddtoCart}
                     }
                 </div>
                 <CardContent className="p-4">
-                    <h2 className="text-xl font-bold mb-1">{product?.title}</h2>
+                    <h2 className="text-xl font-bold mb-1">{product?.title} 1KG</h2>
                     <div className="flex justify-between items-center mb-1">
                         <span className="text-[16px] text-muted-foreground">{categoryOptionsMap[product?.category]}</span>
                     </div>
                     <div className="flex justify-between items-center mb-1">
-                        <span className={`${product?.salePrice > 0 ? "line-through" : ""} text-lg font-semibold text-primary`}>Rs {product?.price}</span>
+                        <span className={`${product?.salePrice > 0 ? "line-through" : ""} text-lg font-semibold text-primary`}>Rs {product?.price}.00</span>
                         {
                             product?.salePrice > 0 ? (<span className="text-lg font-semibold text-primary">Rs {product?.salePrice}</span>) : null
                         }
