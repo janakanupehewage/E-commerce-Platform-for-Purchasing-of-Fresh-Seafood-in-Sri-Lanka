@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, CardContent } from '@/components/ui/card';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, Legend } from 'recharts';
-import { FaUsers, FaBoxOpen, FaShoppingCart } from 'react-icons/fa';
+import { FaUsers, FaBoxOpen, FaShoppingCart, FaCheckCircle } from 'react-icons/fa';
 
 function AdminDashboard() {
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalProducts: 0,
-    totalOrders: 0,
+    totalCompletedOrders: 0,
+    totalPaidOrders: 0,
     totalRevenue: 0,
   });
 
@@ -36,7 +37,7 @@ function AdminDashboard() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
       <Card className={cardStyle}>
-        <FaUsers className={iconStyle} />
+        <FaUsers className={`${iconStyle} text-5xl text-blue-800`} />
         <CardContent>
           <h3 className="text-lg font-semibold text-gray-700">Total Users</h3>
           <p className="text-3xl font-bold text-indigo-800">{stats.totalUsers}</p>
@@ -44,18 +45,26 @@ function AdminDashboard() {
       </Card>
 
       <Card className={cardStyle}>
-        <FaBoxOpen className={iconStyle} />
+        <FaBoxOpen className={`${iconStyle} text-5xl text-orange-600`} />
         <CardContent>
-          <h3 className="text-lg font-semibold text-gray-700">Total Products</h3>
+          <h3 className="text-lg font-semibold text-gray-700">Total Seafoods</h3>
           <p className="text-3xl font-bold text-indigo-800">{stats.totalProducts}</p>
         </CardContent>
       </Card>
 
       <Card className={cardStyle}>
-        <FaShoppingCart className={iconStyle} />
+        <FaShoppingCart className={`${iconStyle} text-4xl text-purple-800`} />
         <CardContent>
-          <h3 className="text-lg font-semibold text-gray-700">Total Orders</h3>
-          <p className="text-3xl font-bold text-indigo-800">{stats.totalOrders}</p>
+          <h3 className="text-lg font-semibold text-gray-700">Paid Orders</h3>
+          <p className="text-3xl font-bold text-indigo-800">{stats.totalPaidOrders}</p>
+        </CardContent>
+      </Card>
+
+      <Card className={cardStyle}>
+        <FaCheckCircle className={`${iconStyle} text-5xl text-teal-600`} />
+        <CardContent>
+          <h3 className="text-lg font-semibold text-gray-700">Completed Orders</h3>
+          <p className="text-3xl font-bold text-indigo-800">{stats.totalCompletedOrders}</p>
         </CardContent>
       </Card>
 

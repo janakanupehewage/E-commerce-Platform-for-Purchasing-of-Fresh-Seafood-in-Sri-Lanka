@@ -7,14 +7,16 @@ const getDashboardStats = async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
     const totalProducts = await Product.countDocuments();
-    const totalOrders = await Order.countDocuments();
+    const totalPaidOrders = await Order.countDocuments({ orderStatus: 'paid' });
+    const totalCompletedOrders = await Order.countDocuments({ orderStatus: 'delivered' });
 
     const totalRevenue = await Order.aggregate([
-      { $match: { orderStatus: 'confirmed' } },
+      { $match: { orderStatus: 'delivered' } },
       { $group: { _id: null, total: { $sum: '$totalAmount' } } }
     ]);
 
     const ordersByMonth = await Order.aggregate([
+      { $match: { orderStatus: { $in: ['paid', 'delivered'] } } },
       {
         $group: {
           _id: {
@@ -35,7 +37,7 @@ const getDashboardStats = async (req, res) => {
 
     // Revenue by Month
     const revenueByMonth = await Order.aggregate([
-      { $match: { orderStatus: 'confirmed' } }, // Only confirmed orders
+      { $match: { orderStatus: 'delivered' } }, // Only confirmed orders
       {
         $group: {
           _id: {
@@ -57,7 +59,8 @@ const getDashboardStats = async (req, res) => {
     res.json({
       totalUsers,
       totalProducts,
-      totalOrders,
+      totalCompletedOrders,
+      totalPaidOrders,
       totalRevenue: totalRevenue[0]?.total || 0,
       ordersByMonth,
       revenueByMonth,  

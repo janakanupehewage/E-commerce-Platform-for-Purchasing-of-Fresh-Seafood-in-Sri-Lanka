@@ -27,7 +27,10 @@ function ShoppingOrders() {
         if(orderDetails !== null) setOpenDetailsDialog(true);
     }, [orderDetails]);
 
-    console.log(orderDetails, "orderDetails");
+    //console.log(orderDetails, "orderDetails");
+
+    // Create a copy of orderList and sort it by orderDate in descending order
+    const sortedOrderList = [...orderList]?.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
 
     return (
         <Card>
@@ -51,34 +54,34 @@ function ShoppingOrders() {
                     </TableHeader>
                     <TableBody>
                         {
-                            orderList && orderList.length > 0 ?
-                            orderList.map(orderItem=> <TableRow>
-                                <TableCell>{orderItem?._id}</TableCell>
-                                <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
-                                <TableCell>
-                                    <Badge className={`py-1 px-3 ${orderItem?.orderStatus === "inDelivery" 
-                                            ? "bg-green-500" :
-                                            orderItem?.orderStatus === "rejected" 
-                                            ? "bg-red-600" 
-                                            : "bg-black"}`}>
-                                    {orderItem?.orderStatus}
-                                    </Badge>
-                                </TableCell>
-                                <TableCell>Rs {orderItem?.totalAmount}.00</TableCell>
-                                <TableCell>
-                                    <Dialog open={openDetailsDialog} onOpenChange={()=>{
-                                        setOpenDetailsDialog(false);
-                                        dispatch(resetOrderDetails());
-                                    }}>
-                                        <Button onClick={()=>handleFetchOrderDetails(orderItem?._id)}>View Details</Button>
-                                        <ShoppingOrderDetailsView orderDetails={orderDetails}/>
-                                    </Dialog>
-                                    
-                                </TableCell>
-                            </TableRow>)
+                            sortedOrderList && sortedOrderList.length > 0 ?
+                            sortedOrderList.map(orderItem => (
+                                <TableRow key={orderItem?._id}>
+                                    <TableCell>{orderItem?._id}</TableCell>
+                                    <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
+                                    <TableCell>
+                                        <Badge className={`py-1 px-3 ${orderItem?.orderStatus === "inDelivery" 
+                                                ? "bg-green-500" :
+                                                orderItem?.orderStatus === "rejected" 
+                                                ? "bg-red-600" 
+                                                : "bg-black"}`}>
+                                        {orderItem?.orderStatus}
+                                        </Badge>
+                                    </TableCell>
+                                    <TableCell>Rs {orderItem?.totalAmount}.00</TableCell>
+                                    <TableCell>
+                                        <Dialog open={openDetailsDialog} onOpenChange={() => {
+                                            setOpenDetailsDialog(false);
+                                            dispatch(resetOrderDetails());
+                                        }}>
+                                            <Button onClick={() => handleFetchOrderDetails(orderItem?._id)}>View Details</Button>
+                                            <ShoppingOrderDetailsView orderDetails={orderDetails}/>
+                                        </Dialog>
+                                    </TableCell>
+                                </TableRow>
+                            ))
                             : null
                         }
-                        
                     </TableBody>
                 </Table>
             </CardContent>
