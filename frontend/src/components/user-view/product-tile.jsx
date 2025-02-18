@@ -22,7 +22,7 @@ function ShoppingProductTile({product, handleGetProductDetails, handleAddtoCart}
                     }
                 </div>
                 <CardContent className="p-4">
-                    <h2 className="text-xl font-bold mb-1">{product?.title} 1KG</h2>
+                    <h2 className="text-xl font-bold mb-1">{product?.title} 1kg</h2>
                     <div className="flex justify-between items-center mb-1">
                         <span className="text-[16px] text-muted-foreground">{categoryOptionsMap[product?.category]}</span>
                     </div>

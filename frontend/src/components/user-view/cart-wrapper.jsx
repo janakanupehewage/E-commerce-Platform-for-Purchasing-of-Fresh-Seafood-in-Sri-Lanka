@@ -2,12 +2,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "../ui/button";
 import { SheetContent, SheetHeader, SheetTitle } from "../ui/sheet";
 import UserCartItemsContent from "./cart-items-content";
+import { useToast } from '@/hooks/use-toast';
 
 
 
 function UserCartWrapper({cartItems, setOpenCartSheet}) {
 
     const navigate = useNavigate();
+    const {toast} = useToast();
 
     const totalCartAmount =
     cartItems && cartItems.length > 0
@@ -43,6 +45,22 @@ function UserCartWrapper({cartItems, setOpenCartSheet}) {
                 </div>
             </div>
             <Button onClick={()=>{
+                if(cartItems.length === 0) {
+                    toast({
+                      title : "Your cart is empty.",
+                      variant : "destructive",
+                    });
+              
+                    return;
+                  }
+                if(totalCartAmount < 8000){
+                    toast({
+                        title: "Minimum order value required",
+                        description: "Bulk purchases require a minimum order of Rs 8,000.00. Please add more seafood to proceed.",
+                        variant : "destructive",
+                      });
+                      return;
+                }
                 navigate("/shop/checkout");
                 setOpenCartSheet(false);
                 }} 

@@ -45,6 +45,15 @@ function ShoppingCheckout() {
       return;
     }
 
+    if(totalCartAmount < 8000){
+      toast({
+        title: "Minimum order value required",
+        description: "Bulk purchases require a minimum order of Rs 8,000.00. Please add more seafood to proceed.",
+          variant : "destructive",
+        });
+        return;
+  }
+
     if (!addressList || addressList.length === 0) {
       // Case: No addresses added
       toast({

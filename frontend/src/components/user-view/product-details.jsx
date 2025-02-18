@@ -155,7 +155,7 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
                 </div>
                 <div className="">
                     <div>
-                        <h1 className="text-3xl font-extrabold">{productDetails?.title}</h1>
+                        <h1 className="text-3xl font-extrabold">{productDetails?.title} 1kg</h1>
                         <p className="text-muted-foreground text-1xl mb-5 mt-4">{productDetails?.description}</p>
                     </div>
                     <div className="flex items-center justify-between">
