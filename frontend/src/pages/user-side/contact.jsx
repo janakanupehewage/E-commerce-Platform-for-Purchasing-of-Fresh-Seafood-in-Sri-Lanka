@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios"; // Import Axios
 import ContactUsImage from "../../assets/contactUs.jpg";
+import { useSelector } from 'react-redux';
+import { useToast } from '@/hooks/use-toast';
 
 function ContactUs() {
   // State for form inputs
@@ -9,6 +11,9 @@ function ContactUs() {
     email: "",
     message: "",
   });
+
+  const {user} = useSelector((state)=> state.auth);
+  const { toast } = useToast();
 
   // State for errors
   const [errors, setErrors] = useState({});
@@ -41,6 +46,14 @@ function ContactUs() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!user){
+      toast({
+        title : "Please Login First.",
+        variant : "destructive",
+      });
+
+      return;
+    }
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);

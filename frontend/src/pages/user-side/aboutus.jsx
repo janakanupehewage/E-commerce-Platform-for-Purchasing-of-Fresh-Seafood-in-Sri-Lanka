@@ -1,7 +1,7 @@
 import React from 'react';
 import githubIcon from '../../assets/github.png';
 import linkedinIcon from '../../assets/linkedin.png';
-import aboutBg from '../../assets/aboutbg.jpg';
+import aboutBg from '../../assets/aboutbg.png';
 
 //import Footer from '../Footer/Footer';
 
