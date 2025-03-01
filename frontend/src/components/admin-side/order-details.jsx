@@ -112,7 +112,7 @@ function AdminOrderDetailsView({orderDetails}) {
                             name: "status",
                             componentType: "select",
                             options: [
-                              { id: "pending", label: "Pending" },
+                              
                               { id: "inProcess", label: "In Process" },
                               { id: "inDelivery", label: "In Delivery" },
                               { id: "delivered", label: "Delivered" },

@@ -31,7 +31,6 @@ const dispatch = useDispatch();
 const { productList, productDetails } = useSelector((state) => state.shopProducts);
 const {cartItems} = useSelector(state=>state.shopCart)
 const {user} = useSelector(state=>state.auth);
-//const {cartItems} = useSelector(state=>state.shopCart);
 const [filters, setFilters] = useState({});
 const [sort, setSort] = useState(null);
 const [ searchParams, setSearchParams ] = useSearchParams();

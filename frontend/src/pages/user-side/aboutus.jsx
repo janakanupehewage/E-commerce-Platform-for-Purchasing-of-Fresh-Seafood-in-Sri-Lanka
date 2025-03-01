@@ -43,7 +43,7 @@ function AboutUs() {
               <li>Easy online ordering and doorstep delivery.</li>
               <li>Affordable pricing with excellent customer service.</li>
             </ul>
-            <h3 className="text-2xl text-blue-700 font-semibold mb-4">
+            {/* <h3 className="text-2xl text-blue-700 font-semibold mb-4">
               Contact Us
             </h3>
             <p className="text-lg text-gray-700 mb-4">
@@ -71,7 +71,7 @@ function AboutUs() {
                 <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6 mr-2" />
                 LinkedIn    
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

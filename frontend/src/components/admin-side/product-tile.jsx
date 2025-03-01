@@ -9,7 +9,7 @@ function AdminProductTile({ product, setFormData, setOpenCreateProductsDialog, s
           <img src={product?.image} alt={product?.title} className="w-full h-[240px] object-cover rounded-t-lg" />
         </div>
         <CardContent>
-          <h2 className="text-xl font-bold mb-2 mt-2">{product?.title} 1KG</h2>
+          <h2 className="text-xl font-bold mb-2 mt-2">{product?.title} 1kg</h2>
           <p className="text-sm text-gray-500 mb-2">Category: {product?.category}</p>
           <div className="flex justify-between items-center mb-2">
             <span className={`${product?.salePrice > 0 ? "line-through" : ""} text-lg font-semibold text-primary`}>

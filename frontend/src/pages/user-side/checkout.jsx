@@ -144,12 +144,10 @@ function ShoppingCheckout() {
             <Button onClick={handleInitiatePaypalPayment} className="w-full">
               {
               
-              //selectedId ?
+              
                 isPaymentStart ? "Processing Paypal Payment..." : "Checkout with Paypal"
 
-                // toast({
-                //   title : "Please Select a Addreess Before Chechkout"
-                // })
+                
               
               }
             </Button>

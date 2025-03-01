@@ -47,7 +47,7 @@ function AdminDashboard() {
       <Card className={cardStyle}>
         <FaBoxOpen className={`${iconStyle} text-5xl text-orange-600`} />
         <CardContent>
-          <h3 className="text-lg font-semibold text-gray-700">Total Seafoods</h3>
+          <h3 className="text-lg font-semibold text-gray-700">Total Seafood</h3>
           <p className="text-3xl font-bold text-indigo-800">{stats.totalProducts}</p>
         </CardContent>
       </Card>

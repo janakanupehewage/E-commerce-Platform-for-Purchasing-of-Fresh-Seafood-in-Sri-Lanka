@@ -1,8 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import bannerOne from "../../assets/newBanner1.png";
-import bannerTwo from "../../assets/newBanner2.png";
-import bannerThree from "../../assets/newBanner3.png";
-import bannerFour from "../../assets/banner4.jpg";
 import fishIcon from "../../assets/fish.png";
 import crabIcon from "../../assets/crab.png";
 import cephalopodsIcon from "../../assets/cephalopods.png";
@@ -17,7 +13,7 @@ import processingIcon from "../../assets/processing_icon.png";
 import deliveryIcon from "../../assets/delivery_icon.png";
 import contactBg from "../../assets/contactBg1.jpg";
 import { Button } from '@/components/ui/button';
-import { ChevronLeftIcon, ChevronRightIcon, Fish } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllFilteredProducts, fetchProductDetails } from '@/store/shop/products-slice';
@@ -47,7 +43,7 @@ function ShoppingHome() {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const slides = [bannerOne, bannerTwo, bannerThree, bannerFour];
+  
 
   function handleNavigateToListingPage(getCurrentItem, section) {
     sessionStorage.removeItem("filters");
@@ -61,18 +57,12 @@ function ShoppingHome() {
   }
 
   function handleGetProductDetails(getCurrentProductId){
-    //console.log(getCurrentProductId);
+    
     dispatch(fetchProductDetails(getCurrentProductId));
   }
 
   function handleAddtoCart(getCurrentProductId){
 
-    // if (!user) {
-    //   navigate('/auth/login');
-    //   return;
-    // }
-
-    //console.log(getCurrentProductId);
     if(user) {
     dispatch(addToCart({ userId : user?.id, productId : getCurrentProductId, quantity : 1,}))
     .then((data) => {
@@ -112,7 +102,7 @@ function ShoppingHome() {
     dispatch(fetchAllFilteredProducts({ filterParams: {}, sortParams: "price-lowtohigh" }));
   }, [dispatch]);
 
-  //console.log(productList, "productList");
+  
 
   useEffect(()=>{
     dispatch(getBannerImages());
@@ -170,10 +160,10 @@ function ShoppingHome() {
         </div>
       </section>
 
-      {/* Featured Products Section */}
+      {/* Fresh & Featured Seafood Section */}
       <section className="py-12">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Featured Fresh Products</h2>
+          <h2 className="text-3xl font-bold text-center mb-8">Fresh & Featured Seafood</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {productList && productList.length > 0
               ? productList

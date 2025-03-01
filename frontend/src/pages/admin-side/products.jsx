@@ -133,7 +133,7 @@ function AdminProducts(){
               : "bg-gray-200 text-gray-700 hover:bg-blue-100"
           }`}
       >
-        All Products
+        All Seafood
       </button>
     </div>
   </div>
@@ -143,7 +143,7 @@ function AdminProducts(){
 
     <div className="mb-5 w-full flex justify-end">
       <Button onClick={()=>setOpenCreateProductsDialog(true)}>
-        Add new Product
+        Add new Seafood
       </Button>
     </div>
     {/* Product List */}
