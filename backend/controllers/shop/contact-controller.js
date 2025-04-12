@@ -15,7 +15,7 @@ const sendEmail = async (req, res) => {
 
     // Email details
     const mailOptions = {
-      from: email, // Sender's email (from the form)
+      from: email, // Sender's email (from form)
       to: 'madhushanfourth@gmail.com', // Admin email to receive the message
       subject: `New Contact Us Message from ${name}`,
       text: `
