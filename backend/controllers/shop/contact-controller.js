@@ -6,10 +6,10 @@ const sendEmail = async (req, res) => {
   try {
     // Configure Nodemailer
     const transporter = nodemailer.createTransport({
-      service: 'gmail', // Use Gmail or another email provider
+      service: 'gmail', // Gmail 
       auth: {
-        user: 'madhushanfourth@gmail.com', // Replace with your email
-        pass: 'bdyc rlgt xkfb mabr', // Replace with your email password
+        user: 'madhushanfourth@gmail.com', 
+        pass: 'bdyc rlgt xkfb mabr', 
       },
     });
 
