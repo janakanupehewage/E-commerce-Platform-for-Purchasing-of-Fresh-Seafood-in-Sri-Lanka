@@ -1,4 +1,4 @@
-import { CircleUser, Fish, House, HousePlug, LogOut, Menu, MenuIcon, ShoppingCart, FileUser } from 'lucide-react'
+import { CircleUser, LogOut, Menu, ShoppingCart, FileUser } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
