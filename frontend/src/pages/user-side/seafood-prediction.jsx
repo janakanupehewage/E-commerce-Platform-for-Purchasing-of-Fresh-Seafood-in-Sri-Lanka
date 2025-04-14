@@ -28,7 +28,7 @@ const SeafoodPrediction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Make POST request to FastAPI backend
+      // Make POST request to FastAPI backend(env added)
       const response = await axios.post(`${import.meta.env.VITE_FAST_API_URL}/predict`, {
         seafood_name: seafoodName,
         num_people: numPeople,
