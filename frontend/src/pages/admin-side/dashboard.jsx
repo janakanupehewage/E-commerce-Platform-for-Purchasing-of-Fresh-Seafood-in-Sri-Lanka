@@ -19,7 +19,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/admin/dashboard/stats`);
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/dashboard/stats`);
         setStats(response.data);
         setChartData(response.data.ordersByMonth);
         setRevenueData(response.data.revenueByMonth); // Set revenue data
