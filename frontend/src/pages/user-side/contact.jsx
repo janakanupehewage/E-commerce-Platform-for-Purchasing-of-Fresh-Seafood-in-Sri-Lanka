@@ -60,7 +60,7 @@ function ContactUs() {
     } else {
       try {
         // Send POST request with Axios
-        const response = await axios.post("http://localhost:5000/api/shop/contact/send-email", formData);
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shop/contact/send-email`, formData);
 
         // Handle success
         if (response.status === 200) {
