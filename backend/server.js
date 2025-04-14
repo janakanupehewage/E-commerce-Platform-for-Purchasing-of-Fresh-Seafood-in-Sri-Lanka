@@ -19,7 +19,7 @@ const shopNutrientRouter = require("./routes/shop/nutrients-routes");
 const commonUIBannerRouter = require("./routes/common/uibanner-routes");
 const contactRouter = require("./routes/shop/contact-routes");
 
-mongoose.connect('mongodb+srv://newmadhushan01:l2NjQs7jW0laWCep@cluster0.c2ecl.mongodb.net/')
+mongoose.connect(process.env.MONGO_DB_URL)
 .then(()=>console.log("Database Connected"))
 .catch((error)=>console.log(error));
 
@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(
     cors({
-        origin : 'http://localhost:5173',
+        origin : process.env.CLIENT_BASE_URL,
         methods : ['GET', 'POST', 'DELETE', 'PUT'],
         allowedHeaders : [
             "Content-Type",
