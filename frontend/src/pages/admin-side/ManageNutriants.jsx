@@ -16,7 +16,7 @@ const AdminManageNutrient = () => {
 
   const fetchSeafood = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/admin/nutrientsHandle`);
+      const response = await axios.get(`http://localhost:5000/api/admin/nutrientsHandle`);
       setSeafoodList(response.data);
     } catch (error) {
         console.log(error);
@@ -28,8 +28,8 @@ const AdminManageNutrient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const endpoint = isEditing
-      ? `${import.meta.env.VITE_API_URL}/api/admin/nutrientsHandle/update/${editingId}`
-      : `${import.meta.env.VITE_API_URL}/api/admin/nutrientsHandle/add`;
+      ? `http://localhost:5000/api/admin/nutrientsHandle/update/${editingId}`
+      : `http://localhost:5000/api/admin/nutrientsHandle/add`;
     const method = isEditing ? "put" : "post";
 
     try {

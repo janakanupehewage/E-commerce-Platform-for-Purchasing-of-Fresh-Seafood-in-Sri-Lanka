@@ -10,14 +10,14 @@ const initialState = {
 
 export const getBannerImages = createAsyncThunk("/order/getBannerImages", async()=>{
 
-    const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/common/banner/get`
+    const response = await axios.get(`http://localhost:5000/api/common/banner/get`
      );
     return response.data;
 });
 
 export const addBannerImages = createAsyncThunk("/order/addBannerImages", async(image)=>{
 
-    const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/common/banner/add`,
+    const response = await axios.post(`http://localhost:5000/api/common/banner/add`,
         {image}
      );
     return response.data;
