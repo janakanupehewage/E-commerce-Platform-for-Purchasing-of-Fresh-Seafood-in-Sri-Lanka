@@ -60,5 +60,9 @@ app.use("/api/shop/nutrientCalculation", shopNutrientRouter);
 app.use("/api/common/banner", commonUIBannerRouter);
 app.use("/api/shop/contact", contactRouter);
 
+app.get("/", (req,res)=>{
+    return res.send("Backend is running")
+})
+
 
 app.listen(PORT, ()=>console.log(`Backend Server Running on Port ${PORT}`));
