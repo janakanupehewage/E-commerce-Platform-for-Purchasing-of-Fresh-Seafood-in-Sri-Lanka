@@ -144,8 +144,8 @@ function ShoppingHome() {
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Shop By Category</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {categoriesWithIcon.map((categoryItem) => (
-              <Card key={categoryItem.id} onClick={()=>handleNavigateToListingPage(categoryItem, "category")} className="cursor-pointer hover:shadow-lg transition-shadow">
+            {categoriesWithIcon.map((categoryItem, index) => (
+              <Card key={index} onClick={()=>handleNavigateToListingPage(categoryItem, "category")} className="cursor-pointer hover:shadow-lg transition-shadow">
                 <CardContent className="flex flex-col items-center justify-center p-6">
                   {categoryItem.isImage ? (
                     <img src={categoryItem.icon} alt={categoryItem.label} className="w-12 h-12 mb-4" />
@@ -172,9 +172,9 @@ function ShoppingHome() {
               ) // Filter only the relevant categories
               .sort((a, b) => a.price - b.price) // Sort by price in ascending order
               .slice(0, 4) // Select the top 4 cheapest products
-              .map((productItem) => (
+              .map((productItem, index) => (
                   <ShoppingProductTile 
-                    key={productItem.id} 
+                    key={index} 
                     handleGetProductDetails={handleGetProductDetails} 
                     product={productItem}
                     handleAddtoCart={handleAddtoCart} 

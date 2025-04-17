@@ -63,13 +63,18 @@ function HeaderRightContent(){
   const dispatch = useDispatch();
 
   function handleLogout(){
-    dispatch(logoutUser());
+    dispatch(logoutUser()).then(() => {
+      //toast.success("You have been logged out");
+      navigate("/shop/home");
+    });
   }
 
-  if(user?.id){
-  useEffect(()=>{
-    dispatch(fetchCartItems(user?.id));
-  },[dispatch]);}
+  useEffect(() => {
+    if (user?.id) {
+      dispatch(fetchCartItems(user?.id));
+    }
+  }, [dispatch, user?.id]);
+  
 
   return (<div className="flex lg:items-center lg:flex-row flex-col gap-4">
     { user ? 
@@ -163,9 +168,9 @@ function ShoppingHeader() {
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
           {
-            logoWithIcon.map((logo)=>
+            logoWithIcon.map((logo, index)=>
               logo.isImage ? (
-                <img src={logo.icon} alt="Fish Logo" className="w-12 h-12 mb-0" />
+                <img key={index} src={logo.icon} alt="Fish Logo" className="w-12 h-12 mb-0" />
               ) : (
                 <logoWithIcon.icon className="w-12 h-12 mb-0 text-primary" />
               )
