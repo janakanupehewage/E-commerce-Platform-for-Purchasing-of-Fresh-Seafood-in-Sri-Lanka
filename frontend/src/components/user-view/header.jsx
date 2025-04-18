@@ -160,25 +160,44 @@ function HeaderRightContent(){
 }
 
 function ShoppingHeader() {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const [open, setOpen] = useState(false); // control Sheet open state
+  const navigate = useNavigate();
 
-  const {isAuthenticated} = useSelector((state)=>state.auth);
+  function handleNavigate(getCurrentMenuItem) {
+    sessionStorage.removeItem("filters");
+
+    const currentFilter =
+      getCurrentMenuItem.id !== "home" &&
+      getCurrentMenuItem.id !== "aboutUs" &&
+      getCurrentMenuItem.id !== "seaFoodProducts" &&
+      getCurrentMenuItem.id !== "contact" &&
+      getCurrentMenuItem.id !== "search"
+        ? {
+            category: [getCurrentMenuItem.id],
+          }
+        : null;
+
+    sessionStorage.setItem("filters", JSON.stringify(currentFilter));
+    navigate(getCurrentMenuItem.path);
+    setOpen(false); // <-- close the hamburger menu
+  }
 
   return (
     <header className="fixed top-0 z-40 w-full border-b bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800">
       <div className="flex h-16 items-center justify-between px-4 md:px-6">
         <Link to="/shop/home" className="flex items-center gap-2">
-          {
-            logoWithIcon.map((logo, index)=>
-              logo.isImage ? (
-                <img key={index} src={logo.icon} alt="Fish Logo" className="w-12 h-12 mb-0" />
-              ) : (
-                <logoWithIcon.icon className="w-12 h-12 mb-0 text-primary" />
-              )
+          {logoWithIcon.map((logo, index) =>
+            logo.isImage ? (
+              <img key={index} src={logo.icon} alt="Fish Logo" className="w-12 h-12 mb-0" />
+            ) : (
+              <logoWithIcon.icon className="w-12 h-12 mb-0 text-primary" />
             )
-          }
+          )}
           <span className="font-bold text-white">OceanFishMarket.lk</span>
         </Link>
-        <Sheet>
+
+        <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="lg:hidden">
               <Menu className="h-6 w-6" />
@@ -186,19 +205,32 @@ function ShoppingHeader() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-full max-w-xs">
-            <MenuItems/>
-            <HeaderRightContent/>
+            {/* Move MenuItems here and pass handleNavigate */}
+            <nav className="flex flex-col mb-3 lg:mb-0 lg:items-center gap-6 lg:flex-row">
+              {shoppingViewHeaderMenuItems.map((menuItem) => (
+                <Label
+                  onClick={() => handleNavigate(menuItem)}
+                  className="text-sm font-medium cursor-pointer hover:text-cyan-400"
+                  key={menuItem.id}
+                >
+                  {menuItem.label}
+                </Label>
+              ))}
+            </nav>
+            <HeaderRightContent />
           </SheetContent>
         </Sheet>
+
         <div className="hidden lg:block">
-          <MenuItems/>
+          <MenuItems />
         </div>
         <div className="hidden lg:block">
-          <HeaderRightContent/>
-        </div>  
+          <HeaderRightContent />
+        </div>
       </div>
     </header>
-  )
+  );
 }
+
 
 export default ShoppingHeader;

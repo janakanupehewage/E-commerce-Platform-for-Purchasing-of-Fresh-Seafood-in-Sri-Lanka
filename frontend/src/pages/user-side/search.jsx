@@ -34,6 +34,8 @@ function SearchProducts() {
   }, [keyword]);
 
   function handleAddtoCart(getCurrentProductId, getTotalStock) {
+
+    if(user){
     let getCartItems = cartItems.items || [];
     if (getCartItems.length) {
       const indexOfCurrentItem = getCartItems.findIndex(
@@ -61,6 +63,12 @@ function SearchProducts() {
         }
       }
     );
+    } else {
+      toast({
+        title : "Please Login First",
+        variant: "destructive",
+      });
+    }
   }
 
   function handleGetProductDetails(getCurrentProductId) {

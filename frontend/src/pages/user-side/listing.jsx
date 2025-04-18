@@ -66,12 +66,14 @@ function handleFilter(getSectionId, getCurrentOption){
 }
 
 function handleGetProductDetails(getCurrentProductId){
-  console.log(getCurrentProductId);
+  //console.log(getCurrentProductId);
   dispatch(fetchProductDetails(getCurrentProductId));
 }
 
 function handleAddtoCart(getCurrentProductId, getTotalStock){
-  console.log(cartItems);
+  //console.log(cartItems);
+
+  if(user){
 
   let getCartItems = cartItems.items || [];
 
@@ -101,6 +103,13 @@ function handleAddtoCart(getCurrentProductId, getTotalStock){
       });
     }
   });
+}
+else{
+  toast({
+    title : "Please Login First",
+    variant: "destructive",
+  });
+}
   
 }
 
