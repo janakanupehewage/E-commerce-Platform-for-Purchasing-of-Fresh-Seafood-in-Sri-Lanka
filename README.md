@@ -2,9 +2,9 @@
 
 ## 📖 Overview
 
-This project is an e-commerce platform for purchasing fresh seafood in Sri Lanka. The frontend is built with React, Redux, and Tailwind CSS, while the backend is developed using Node.js and Express.js, with MongoDB as the database. It features secure authentication, product management, order processing, real-time notifications, and a feedback system. 
+This project is a single-vendor e-commerce platform for purchasing fresh seafood in Sri Lanka. The frontend is built with React, Redux, and Tailwind CSS, while the backend is developed using Node.js and Express.js, with MongoDB as the database. It features secure authentication, product management, order processing, real-time notifications, and a customer review. 
 
-Additionally, this platform integrated a machine learning-powered prediction model via FastAPI, helping users predict the approximate required seafood quantity for cooking at special events, such as weddings and other functions, based on the type of seafood and the number of attendees. This enhances purchasing efficiency, reduces waste, and optimizes decision-making.
+Additionally, this platform integrates a machine learning-powered prediction model via FastAPI, helping users predict the approximate required seafood quantity for cooking at special events, such as weddings and other functions, based on the type of seafood and the number of attendees. This enhances purchasing efficiency, reduces waste, and optimizes decision-making.
 
 ---
 
