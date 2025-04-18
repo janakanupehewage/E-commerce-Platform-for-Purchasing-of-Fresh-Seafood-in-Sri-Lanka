@@ -44,7 +44,15 @@ function App() {
   },[dispatch]);
 
   if(isLoading){
-    return <Skeleton className="w-[100px] h-[20px] rounded-full" />;
+    return (
+      <div className="w-screen h-screen flex items-center justify-center bg-white">
+        <div className="flex flex-col items-center gap-4">
+          <Skeleton className="w-64 h-6 rounded-lg" />
+          <Skeleton className="w-32 h-6 rounded-lg" />
+        </div>
+      </div>
+    );
+    
   }
 
   //console.log(isLoading, user);
