@@ -65,7 +65,7 @@ function HeaderRightContent(){
   function handleLogout(){
     dispatch(logoutUser()).then(() => {
       //toast.success("You have been logged out");
-      navigate("/shop/home");
+      navigate("/shop/home"); //navigate to home
     });
   }
 
