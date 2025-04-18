@@ -51,7 +51,7 @@ function App() {
           <Skeleton className="w-64 h-6 rounded-lg bg-blue-200" />
           <Skeleton className="w-32 h-6 rounded-lg bg-blue-300" />
           <p className="text-blue-600 font-semibold text-sm tracking-wide">
-            Preparing your experience...
+            Just a moment... scaling up your seafood experience!
           </p>
         </div>
       </div>
