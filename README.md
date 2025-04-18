@@ -43,5 +43,5 @@ Additionally, this platform integrated a machine learning-powered prediction mod
 
 ## 🌐 Live Link
 
-- 🔗 Live Application: [https://your-live-link.com](https://your-live-link.com)  
+- 🔗 Live Application: [https://oceanfishmarket.vercel.app](https://oceanfishmarket.vercel.app)  
 
