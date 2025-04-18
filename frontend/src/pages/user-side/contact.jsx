@@ -190,7 +190,7 @@ function ContactUs() {
                 </p>
               )}
 
-              {/* Submit Button */}
+              {/* Submit Button with loader */}
               <div className="text-center">
                 <button
                   disabled={isSubmitting}
