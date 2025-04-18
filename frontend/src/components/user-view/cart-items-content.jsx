@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCartItem, updateCartQuantity } from "@/store/shop/cart-slice";
 import { useToast } from "@/hooks/use-toast";
+import { useState } from "react";
 //import { useToast } from "../ui/toast";
 
 
@@ -16,6 +17,7 @@ function UserCartItemsContent({cartItem}) {
     );
     const dispatch = useDispatch();
     const {toast} = useToast();
+    const [deletCartItem, setDeletCartItem] = useState(false);
 
     function handleUpdateQuantity(getCartItem, typeOfAction){
 
@@ -62,15 +64,19 @@ function UserCartItemsContent({cartItem}) {
 
     function handleCartItemDelete(getCartItem){
 
-        dispatch(deleteCartItem({userId : user?.id, productId : getCartItem?.productId})
-    ).then((data)=>{
-        if(data?.payload?.success){
-            toast({
-                title : "Cart item is deleted successfully"
-            });
-        }
-    });
+        setDeletCartItem(true);
 
+        setTimeout(() => {
+            dispatch(deleteCartItem({userId : user?.id, productId : getCartItem?.productId})
+            ).then((data)=>{
+                if(data?.payload?.success){
+                    toast({
+                        title : "Cart item is deleted successfully"
+                    });
+                }
+                setDeletCartItem(false);
+            });
+        }, 200);
     }
 
 
@@ -106,7 +112,16 @@ function UserCartItemsContent({cartItem}) {
                 <p className="font-semibold">
                     Rs {((cartItem?.salePrice > 0 ? cartItem?.salePrice : cartItem?.price) * cartItem?.quantity).toFixed(2)}
                 </p>
-                <Trash onClick={()=>handleCartItemDelete(cartItem)} className="cursor-pointer mt-1" size={20} />
+                <Button
+                    variant="ghost"
+                    size="icon"
+                    className="mt-1"
+                    onClick={() => handleCartItemDelete(cartItem)}
+                    disabled={deletCartItem}
+                    >
+                    <Trash size={20} />
+                </Button>
+
             </div>
         </div>
 

@@ -25,6 +25,8 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
     const {cartItems} = useSelector((state)=>state.shopCart);
     const {reviews} = useSelector((state)=>state.shopReview);
     const { toast } = useToast();
+    const [addingToCart, setAddingToCart] = useState(false);
+
 
     function handleRatingChange(getRating){
         setRating(getRating);
@@ -55,17 +57,22 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
             
         }
 
+        setAddingToCart(true); // Start loading
+
       //console.log(getCurrentProductId);
-      dispatch(addToCart({ userId : user?.id, productId : getCurrentProductId, quantity : 1,}))
-      .then((data) => {
-        if(data?.payload?.success){
-          dispatch(fetchCartItems(user?.id));
-          toast({
-            title: "Product is added to cart",
-            duration: 3000,
-          });
-        }
-      });
+      setTimeout(() => {
+        dispatch(addToCart({ userId : user?.id, productId : getCurrentProductId, quantity : 1,}))
+        .then((data) => {
+            if(data?.payload?.success){
+            dispatch(fetchCartItems(user?.id));
+            toast({
+                title: "Product is added to cart",
+                duration: 3000,
+            });
+            }
+            setAddingToCart(false); // Stop loading
+        }); 
+    }, 300);
 
     } else {
         toast({
@@ -181,7 +188,10 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
                         {
                             productDetails?.totalStock === 0 ? 
                             <Button className="w-full opacity-60 cursor-not-allowed" >Out of Stock</Button> :
-                            <Button className="w-full" onClick={()=>handleAddtoCart(productDetails?._id, productDetails?.totalStock)}>Add to Cart</Button>
+                            <Button className="w-full" disabled={addingToCart} onClick={() => handleAddtoCart(productDetails?._id, productDetails?.totalStock)}>
+                            {addingToCart ? "Adding..." : "Add to Cart"}
+                            </Button>
+
                         }
                         
                     </div>

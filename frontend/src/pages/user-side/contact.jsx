@@ -14,6 +14,8 @@ function ContactUs() {
 
   const {user} = useSelector((state)=> state.auth);
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   // State for errors
   const [errors, setErrors] = useState({});
@@ -46,6 +48,7 @@ function ContactUs() {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if(!user){
       toast({
         title : "Please Login First.",
@@ -55,9 +58,12 @@ function ContactUs() {
       return;
     }
     const validationErrors = validate();
+
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
+      
+      setIsSubmitting(true);
       try {
         // Send POST request with Axios
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/shop/contact/send-email`, formData);
@@ -73,6 +79,8 @@ function ContactUs() {
         setSubmissionMessage(
           "Something went wrong while submitting your message. Please try again later."
         );
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
@@ -185,10 +193,13 @@ function ContactUs() {
               {/* Submit Button */}
               <div className="text-center">
                 <button
+                  disabled={isSubmitting}
                   type="submit"
-                  className="bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg hover:bg-blue-700 transition duration-300"
+                  className={`${
+                    isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'
+                  } bg-blue-600 text-white font-semibold px-6 py-2 rounded-lg transition duration-300`}
                 >
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </div>
             </form>

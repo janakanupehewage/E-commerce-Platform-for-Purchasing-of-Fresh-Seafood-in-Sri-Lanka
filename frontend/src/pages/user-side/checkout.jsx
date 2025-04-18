@@ -36,7 +36,9 @@ function ShoppingCheckout() {
 
   function handleInitiatePaypalPayment(){
 
-    if(cartItems.length === 0) {
+    console.log(cartItems, "cartItems");
+
+    if(cartItems.items.length === 0) {
       toast({
         title : "Your cart is empty.",
         variant : "destructive",
@@ -45,10 +47,10 @@ function ShoppingCheckout() {
       return;
     }
 
-    if(totalCartAmount < 8000){
+    if(totalCartAmount < 4000){
       toast({
         title: "Minimum order value required",
-        description: "Bulk purchases require a minimum order of Rs 8,000.00. Please add more seafood to proceed.",
+        description: "Bulk purchases require a minimum order of Rs 4,000.00. Please add more seafood to proceed.",
           variant : "destructive",
         });
         return;
@@ -129,8 +131,8 @@ function ShoppingCheckout() {
         <div className="flex flex-col gap-4">
           {
             cartItems && cartItems.items && cartItems.items.length > 0 
-            ? cartItems.items.map((item)=> (
-                <UserCartItemsContent cartItem={item}/>
+            ? cartItems.items.map((item, index)=> (
+                <UserCartItemsContent key={index} cartItem={item}/>
               )) 
             : null
           }

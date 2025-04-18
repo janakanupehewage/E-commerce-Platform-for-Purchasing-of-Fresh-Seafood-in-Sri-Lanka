@@ -7,6 +7,7 @@ const SeafoodPrediction = () => {
   const [numPeople, setNumPeople] = useState(1);
   const [predictionResult, setPredictionResult] = useState(null);
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // List of seafood names
   const seafoodNames = [
@@ -28,6 +29,7 @@ const SeafoodPrediction = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsSubmitting(true);
       // Make POST request to FastAPI backend(env added)
       const response = await axios.post(`${import.meta.env.VITE_FAST_API_URL}/predict`, {
         seafood_name: seafoodName,
@@ -38,6 +40,8 @@ const SeafoodPrediction = () => {
     } catch (err) {
       setError('Error: ' + err.response.data.detail || 'Unknown error');
       setPredictionResult(null);
+    } finally{
+      setIsSubmitting(false);
     }
   };
 
@@ -94,9 +98,10 @@ const SeafoodPrediction = () => {
             </div>
             <button
               type="submit"
-              className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200"
+              disabled={isSubmitting}
+              className={`${ isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700' } w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition duration-200`}
             >
-              Predict
+              {isSubmitting ? "Predicting..." : "Predict"}
             </button>
           </form>
 
