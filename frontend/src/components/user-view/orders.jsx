@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Dialog } from "../ui/dialog";
+import { Dialog, DialogContent } from "../ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import ShoppingOrderDetailsView from "./order-details";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,83 +9,89 @@ import { getAllOrdersByUserId, getOrderDetails, resetOrderDetails } from "@/stor
 import { Badge } from "../ui/badge";
 
 function ShoppingOrders() {
-
     const [openDetailsDialog, setOpenDetailsDialog] = useState(false);
     const dispatch = useDispatch();
-    const {user} = useSelector(state=>state.auth);
-    const {orderList, orderDetails} = useSelector(state=>state.shopOrder);
+    const { user } = useSelector(state => state.auth);
+    const { orderList, orderDetails } = useSelector(state => state.shopOrder);
 
-    function handleFetchOrderDetails(getId){
-        dispatch(getOrderDetails(getId));
-    }
-
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(getAllOrdersByUserId(user?.id));
-    }, [dispatch]);
+    }, [dispatch, user?.id]);
 
-    useEffect(()=>{
-        if(orderDetails !== null) setOpenDetailsDialog(true);
-    }, [orderDetails]);
+    const handleFetchOrderDetails = (orderId) => {
+        dispatch(getOrderDetails(orderId));
+    };
 
-    //console.log(orderDetails, "orderDetails");
-
-    // Create a copy of orderList and sort it by orderDate in descending order
     const sortedOrderList = [...orderList]?.sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate));
 
+    useEffect(() => {
+        if (orderDetails !== null) setOpenDetailsDialog(true);
+    }, [orderDetails]);
+
     return (
-        <Card>
-            <CardHeader>
-                <CardTitle>
-                    My Orders
-                </CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Table>
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead>Order ID</TableHead>
-                            <TableHead>Order Date</TableHead>
-                            <TableHead>Order Status</TableHead>
-                            <TableHead>Order Price</TableHead>
-                            <TableHead>
-                                <span className="sr-only">Details</span>
-                            </TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {
-                            sortedOrderList && sortedOrderList.length > 0 ?
-                            sortedOrderList.map(orderItem => (
-                                <TableRow key={orderItem?._id}>
-                                    <TableCell>{orderItem?._id}</TableCell>
-                                    <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
-                                    <TableCell>
-                                        <Badge className={`py-1 px-3 ${orderItem?.orderStatus === "inDelivery" 
-                                                ? "bg-green-500" :
-                                                orderItem?.orderStatus === "rejected" 
-                                                ? "bg-red-600" 
+        <>
+            <Card>
+                <CardHeader>
+                    <CardTitle>My Orders</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <Table>
+                        <TableHeader>
+                            <TableRow>
+                                <TableHead>Order ID</TableHead>
+                                <TableHead>Order Date</TableHead>
+                                <TableHead>Order Status</TableHead>
+                                <TableHead>Order Price</TableHead>
+                                <TableHead><span className="sr-only">Details</span></TableHead>
+                            </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                            {sortedOrderList?.length > 0 ? (
+                                sortedOrderList.map(orderItem => (
+                                    <TableRow key={orderItem?._id}>
+                                        <TableCell>{orderItem?._id}</TableCell>
+                                        <TableCell>{orderItem?.orderDate.split("T")[0]}</TableCell>
+                                        <TableCell>
+                                            <Badge className={`py-1 px-3 ${orderItem?.orderStatus === "inDelivery"
+                                                ? "bg-green-500"
+                                                : orderItem?.orderStatus === "rejected"
+                                                ? "bg-red-600"
                                                 : "bg-black"}`}>
-                                        {orderItem?.orderStatus}
-                                        </Badge>
-                                    </TableCell>
-                                    <TableCell>Rs {orderItem?.totalAmount}.00</TableCell>
-                                    <TableCell>
-                                        <Dialog open={openDetailsDialog} onOpenChange={() => {
-                                            setOpenDetailsDialog(false);
-                                            dispatch(resetOrderDetails());
-                                        }}>
-                                            <Button onClick={() => handleFetchOrderDetails(orderItem?._id)}>View Details</Button>
-                                            <ShoppingOrderDetailsView orderDetails={orderDetails}/>
-                                        </Dialog>
+                                                {orderItem?.orderStatus}
+                                            </Badge>
+                                        </TableCell>
+                                        <TableCell>Rs {orderItem?.totalAmount}.00</TableCell>
+                                        <TableCell>
+                                            <Button onClick={() => handleFetchOrderDetails(orderItem?._id)}>
+                                                View Details
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={5} className="text-center text-gray-500">
+                                        No orders found.
                                     </TableCell>
                                 </TableRow>
-                            ))
-                            : null
-                        }
-                    </TableBody>
-                </Table>
-            </CardContent>
-        </Card>
+                            )}
+                        </TableBody>
+                    </Table>
+                </CardContent>
+            </Card>
+
+            {/* Dialog shown separately */}
+            <Dialog open={openDetailsDialog} onOpenChange={(open) => {
+                if (!open) {
+                    setOpenDetailsDialog(false);
+                    dispatch(resetOrderDetails());
+                }
+            }}>
+                <DialogContent className="w-[90vw] sm:max-w-[550px] max-h-[90vh] overflow-y-auto rounded-lg border-none">
+                    {orderDetails && <ShoppingOrderDetailsView orderDetails={orderDetails} />}
+                </DialogContent>
+            </Dialog>
+        </>
     );
 }
 
