@@ -160,7 +160,7 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
                         className="aspect-square w-full object-cover"
                     />
                 </div>
-                <div className="">
+                <div className="max-h-[80vh] overflow-y-auto pr-2">
                     <div>
                         <h1 className="text-3xl font-extrabold">{productDetails?.title} 1kg</h1>
                         <p className="text-muted-foreground text-1xl mb-5 mt-4">{productDetails?.description}</p>

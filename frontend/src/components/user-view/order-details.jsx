@@ -16,7 +16,7 @@ function ShoppingOrderDetailsView({ orderDetails }) {
     };
 
     return (
-        <DialogContent className="sm:max-w-[550px] h-[600px] overflow-y-auto">
+        <DialogContent className="w-[90vw] sm:max-w-[550px] max-h-[90vh] overflow-y-auto rounded-lg">
             <div className="grid gap-6">
                 
                 {/* Important Notice Section */}
