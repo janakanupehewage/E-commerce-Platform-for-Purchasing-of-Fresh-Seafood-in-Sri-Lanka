@@ -178,7 +178,7 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
                         ) : null
                         }
                     </div>
-                    <div className="flex items-center gap-2 mt-2">
+                    <div className="flex flex-wrap items-center gap-2 mt-2 sm:flex-nowrap">
                         <div className="flex items-center gap-0.5">
                             <StarRatingComponent rating={averageReview}/>
                         </div>

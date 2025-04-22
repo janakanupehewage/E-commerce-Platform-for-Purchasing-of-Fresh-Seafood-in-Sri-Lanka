@@ -54,7 +54,7 @@ function MenuItems(){
   </nav>
 }
 
-function HeaderRightContent(){
+function HeaderRightContent({ setSheetOpen }){
 
   const {user} = useSelector((state)=>state.auth);
   const {cartItems} = useSelector(state=>state.shopCart);
@@ -64,6 +64,11 @@ function HeaderRightContent(){
 
   function handleLogout(){
     dispatch(logoutUser()).then(() => {
+      
+      // Close mobile sheet if prop exists
+    if (typeof setSheetOpen === "function") {
+      setSheetOpen(false);
+    }
       //toast.success("You have been logged out");
       navigate("/shop/home"); //navigate to home
     });
@@ -126,7 +131,11 @@ function HeaderRightContent(){
         {user?.userName ?  
         
           <>
-        <DropdownMenuItem onClick={()=>navigate("/shop/account")}> 
+        <DropdownMenuItem onClick={()=>{ 
+              navigate("/shop/account");
+              setSheetOpen?.(false); // <-- Close Sheet if function is passed
+
+            }}> 
           <CircleUser className="mr-2 h-4 w-4 text-green-400"/>
           My Account
         </DropdownMenuItem>
@@ -217,7 +226,7 @@ function ShoppingHeader() {
                 </Label>
               ))}
             </nav>
-            <HeaderRightContent />
+            <HeaderRightContent setSheetOpen={setOpen} />
           </SheetContent>
         </Sheet>
 
