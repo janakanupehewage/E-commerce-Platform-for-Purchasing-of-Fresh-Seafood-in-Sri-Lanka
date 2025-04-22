@@ -178,11 +178,11 @@ function ProductDetailsDialog({open, setOpen, productDetails}){
                         ) : null
                         }
                     </div>
-                    <div className="flex flex-wrap items-center gap-2 mt-2 sm:flex-nowrap">
-                        <div className="flex items-center gap-0.5">
+                    <div className="flex flex-wrap items-center gap-2 mt-2 max-w-full overflow-hidden">
+                        <div className="flex items-center gap-0.5 flex-wrap max-w-full">
                             <StarRatingComponent rating={averageReview}/>
                         </div>
-                        <span className="text-muted-foreground">({averageReview.toFixed(2)})</span>
+                        <span className="text-muted-foreground whitespace-nowrap text-sm">({averageReview.toFixed(2)})</span>
                     </div>
                     <div className="mt-5 mb-5">
                         {
