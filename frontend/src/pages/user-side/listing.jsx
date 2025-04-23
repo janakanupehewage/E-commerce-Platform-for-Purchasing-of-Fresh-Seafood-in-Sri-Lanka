@@ -136,7 +136,7 @@ useEffect(() => {
   if(productDetails !== null) setOpenDetailsDialog(true)
 }, [productDetails])
 
-//console.log(productList, "productList");
+//console.log(productList, "productList"); product list
   //fetch list of products
 
 
