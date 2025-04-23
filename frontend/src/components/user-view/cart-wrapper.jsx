@@ -5,7 +5,7 @@ import UserCartItemsContent from "./cart-items-content";
 import { useToast } from '@/hooks/use-toast';
 import { useState } from "react"; // Import useState
 
-function UserCartWrapper({ cartItems, setOpenCartSheet }) {
+function UserCartWrapper({ cartItems, setOpenCartSheet, setSheetOpen }) {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false); // Add a loading state
@@ -47,8 +47,9 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
     setTimeout(() => {
       navigate("/shop/checkout");
       setOpenCartSheet(false);
+      setSheetOpen?.(false);
       setIsLoading(false); // Set loading to false when done
-    }, 400); // Simulating a 1-second delay for demonstration
+    }, 400); // Simulated delay
   };
 
   return (
@@ -58,7 +59,7 @@ function UserCartWrapper({ cartItems, setOpenCartSheet }) {
       </SheetHeader>
       <div className="mt-8 space-y-4 flex-grow overflow-y-auto">
         {cartItems && cartItems.length > 0
-          ? cartItems.map((item) => <UserCartItemsContent cartItem={item} />)
+          ? cartItems.map((item, index) => <UserCartItemsContent key={index} cartItem={item} />)
           : null}
       </div>
       <div className="mt-5 space-y-4">

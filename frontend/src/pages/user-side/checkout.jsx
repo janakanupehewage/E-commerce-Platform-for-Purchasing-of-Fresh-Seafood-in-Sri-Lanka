@@ -18,7 +18,7 @@ function ShoppingCheckout() {
   const dispatch = useDispatch();
   const {toast} = useToast();
 
-  console.log(currentSelectedAddress, "currentSelectedAddress");
+  //console.log(currentSelectedAddress, "currentSelectedAddress");
 
   const totalCartAmount =
   cartItems && cartItems.items && cartItems.items.length > 0
@@ -36,7 +36,7 @@ function ShoppingCheckout() {
 
   function handleInitiatePaypalPayment(){
 
-    console.log(cartItems, "cartItems");
+    //console.log(cartItems, "cartItems");
 
     if(cartItems.items.length === 0) {
       toast({

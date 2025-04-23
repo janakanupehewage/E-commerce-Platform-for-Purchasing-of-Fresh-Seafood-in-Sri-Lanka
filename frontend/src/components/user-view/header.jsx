@@ -90,7 +90,7 @@ function HeaderRightContent({ setSheetOpen }){
         <span className="sr-only">User cart</span>
       </Button>
       <UserCartWrapper
-        setOpenCartSheet={setOpenCartSheet} 
+        setOpenCartSheet={setOpenCartSheet} setSheetOpen={setSheetOpen}
         cartItems={cartItems && cartItems.items && cartItems.items.length > 0 ? cartItems.items : []}
       />
     </Sheet>

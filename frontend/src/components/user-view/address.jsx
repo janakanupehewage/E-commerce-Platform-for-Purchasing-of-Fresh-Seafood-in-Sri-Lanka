@@ -100,7 +100,7 @@ function Address({setCurrentSelectedAddress, selectedId}) {
         dispatch(fetchAllAddresses(user?.id));
     }, [dispatch]);
 
-    console.log(addressList, "addressList");
+    //console.log(addressList, "addressList");
     
 
     return (
@@ -108,8 +108,9 @@ function Address({setCurrentSelectedAddress, selectedId}) {
             <div className="mb-5 p-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                 {
                    addressList && addressList.length > 0 ?
-                   addressList.map((singleAddressItem)=> (
+                   addressList.map((singleAddressItem, index)=> (
                    <AddressCard
+                    key={index}
                     selectedId={selectedId} 
                     handleDeleteAddress={handleDeleteAddress} 
                     addressInfo={singleAddressItem}

@@ -136,7 +136,7 @@ useEffect(() => {
   if(productDetails !== null) setOpenDetailsDialog(true)
 }, [productDetails])
 
-console.log(productList, "productList");
+//console.log(productList, "productList");
   //fetch list of products
 
 
@@ -175,8 +175,9 @@ console.log(productList, "productList");
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-8 p-8">
           {
             productList && productList.length > 0 ?
-            productList.map((productItem) => (
-              <ShoppingProductTile 
+            productList.map((productItem, index) => (
+              <ShoppingProductTile
+              key={index} 
               handleGetProductDetails={handleGetProductDetails} 
               product={productItem}
               handleAddtoCart={handleAddtoCart}
