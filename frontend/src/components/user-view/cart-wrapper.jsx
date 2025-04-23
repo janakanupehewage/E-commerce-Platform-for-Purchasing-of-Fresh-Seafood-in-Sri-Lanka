@@ -49,7 +49,7 @@ function UserCartWrapper({ cartItems, setOpenCartSheet, setSheetOpen }) {
       setOpenCartSheet(false);
       setSheetOpen?.(false);
       setIsLoading(false); // Set loading to false when done
-    }, 400); // Simulated delay
+    }, 400); // delay
   };
 
   return (
