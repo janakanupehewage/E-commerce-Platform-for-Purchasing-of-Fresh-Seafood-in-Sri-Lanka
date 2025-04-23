@@ -98,7 +98,7 @@ const loginUser = async (req, res) => {
     }
   };
   
-  //logout
+  //logout function
   
   const logoutUser = (req, res) => {
     res.clearCookie("token", {
